@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ADD45DE5-B8CA-422A-851E-2B5E8F49BA2E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GLFW</RootNamespace>
+    <AssemblyName>glfw-net</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GLFW.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\COPYING.txt" />
+    <Content Include="lib\docs\html\annotated.html" />
+    <Content Include="lib\docs\html\bc_s.png" />
+    <Content Include="lib\docs\html\bdwn.png" />
+    <Content Include="lib\docs\html\bug.html" />
+    <Content Include="lib\docs\html\build.html" />
+    <Content Include="lib\docs\html\build_8dox.html" />
+    <Content Include="lib\docs\html\classes.html" />
+    <Content Include="lib\docs\html\closed.png" />
+    <Content Include="lib\docs\html\compat.html" />
+    <Content Include="lib\docs\html\compat_8dox.html" />
+    <Content Include="lib\docs\html\compile.html" />
+    <Content Include="lib\docs\html\compile_8dox.html" />
+    <Content Include="lib\docs\html\context.html" />
+    <Content Include="lib\docs\html\context_8dox.html" />
+    <Content Include="lib\docs\html\dir_2424ad704b206c89082f9408cac4dea1.html" />
+    <Content Include="lib\docs\html\dir_cad64ac143687238294d0ef1c4308bc1.html" />
+    <Content Include="lib\docs\html\dir_d0d9ff8e306589526ff939d1e8a51d35.html" />
+    <Content Include="lib\docs\html\doxygen.css" />
+    <Content Include="lib\docs\html\doxygen.png" />
+    <Content Include="lib\docs\html\dynsections.js" />
+    <Content Include="lib\docs\html\extra.css" />
+    <Content Include="lib\docs\html\files.html" />
+    <Content Include="lib\docs\html\ftv2blank.png" />
+    <Content Include="lib\docs\html\ftv2cl.png" />
+    <Content Include="lib\docs\html\ftv2doc.png" />
+    <Content Include="lib\docs\html\ftv2folderclosed.png" />
+    <Content Include="lib\docs\html\ftv2folderopen.png" />
+    <Content Include="lib\docs\html\ftv2lastnode.png" />
+    <Content Include="lib\docs\html\ftv2link.png" />
+    <Content Include="lib\docs\html\ftv2mlastnode.png" />
+    <Content Include="lib\docs\html\ftv2mnode.png" />
+    <Content Include="lib\docs\html\ftv2mo.png" />
+    <Content Include="lib\docs\html\ftv2node.png" />
+    <Content Include="lib\docs\html\ftv2ns.png" />
+    <Content Include="lib\docs\html\ftv2plastnode.png" />
+    <Content Include="lib\docs\html\ftv2pnode.png" />
+    <Content Include="lib\docs\html\ftv2splitbar.png" />
+    <Content Include="lib\docs\html\ftv2vertline.png" />
+    <Content Include="lib\docs\html\functions.html" />
+    <Content Include="lib\docs\html\functions_vars.html" />
+    <Content Include="lib\docs\html\glfw3native_8h.html" />
+    <Content Include="lib\docs\html\glfw3native_8h_source.html" />
+    <Content Include="lib\docs\html\glfw3_8h.html" />
+    <Content Include="lib\docs\html\glfw3_8h_source.html" />
+    <Content Include="lib\docs\html\globals.html" />
+    <Content Include="lib\docs\html\globals_b.html" />
+    <Content Include="lib\docs\html\globals_c.html" />
+    <Content Include="lib\docs\html\globals_d.html" />
+    <Content Include="lib\docs\html\globals_defs.html" />
+    <Content Include="lib\docs\html\globals_defs_b.html" />
+    <Content Include="lib\docs\html\globals_defs_c.html" />
+    <Content Include="lib\docs\html\globals_defs_d.html" />
+    <Content Include="lib\docs\html\globals_defs_f.html" />
+    <Content Include="lib\docs\html\globals_defs_g.html" />
+    <Content Include="lib\docs\html\globals_defs_h.html" />
+    <Content Include="lib\docs\html\globals_defs_i.html" />
+    <Content Include="lib\docs\html\globals_defs_j.html" />
+    <Content Include="lib\docs\html\globals_defs_k.html" />
+    <Content Include="lib\docs\html\globals_defs_l.html" />
+    <Content Include="lib\docs\html\globals_defs_m.html" />
+    <Content Include="lib\docs\html\globals_defs_n.html" />
+    <Content Include="lib\docs\html\globals_defs_o.html" />
+    <Content Include="lib\docs\html\globals_defs_p.html" />
+    <Content Include="lib\docs\html\globals_defs_r.html" />
+    <Content Include="lib\docs\html\globals_defs_s.html" />
+    <Content Include="lib\docs\html\globals_defs_v.html" />
+    <Content Include="lib\docs\html\globals_e.html" />
+    <Content Include="lib\docs\html\globals_f.html" />
+    <Content Include="lib\docs\html\globals_func.html" />
+    <Content Include="lib\docs\html\globals_g.html" />
+    <Content Include="lib\docs\html\globals_h.html" />
+    <Content Include="lib\docs\html\globals_i.html" />
+    <Content Include="lib\docs\html\globals_j.html" />
+    <Content Include="lib\docs\html\globals_k.html" />
+    <Content Include="lib\docs\html\globals_l.html" />
+    <Content Include="lib\docs\html\globals_m.html" />
+    <Content Include="lib\docs\html\globals_n.html" />
+    <Content Include="lib\docs\html\globals_o.html" />
+    <Content Include="lib\docs\html\globals_p.html" />
+    <Content Include="lib\docs\html\globals_r.html" />
+    <Content Include="lib\docs\html\globals_s.html" />
+    <Content Include="lib\docs\html\globals_t.html" />
+    <Content Include="lib\docs\html\globals_type.html" />
+    <Content Include="lib\docs\html\globals_v.html" />
+    <Content Include="lib\docs\html\globals_w.html" />
+    <Content Include="lib\docs\html\group__buttons.html" />
+    <Content Include="lib\docs\html\group__context.html" />
+    <Content Include="lib\docs\html\group__errors.html" />
+    <Content Include="lib\docs\html\group__init.html" />
+    <Content Include="lib\docs\html\group__input.html" />
+    <Content Include="lib\docs\html\group__joysticks.html" />
+    <Content Include="lib\docs\html\group__keys.html" />
+    <Content Include="lib\docs\html\group__mods.html" />
+    <Content Include="lib\docs\html\group__monitor.html" />
+    <Content Include="lib\docs\html\group__native.html" />
+    <Content Include="lib\docs\html\group__shapes.html" />
+    <Content Include="lib\docs\html\group__window.html" />
+    <Content Include="lib\docs\html\index.html" />
+    <Content Include="lib\docs\html\input.html" />
+    <Content Include="lib\docs\html\input_8dox.html" />
+    <Content Include="lib\docs\html\intro.html" />
+    <Content Include="lib\docs\html\intro_8dox.html" />
+    <Content Include="lib\docs\html\jquery.js" />
+    <Content Include="lib\docs\html\main_8dox.html" />
+    <Content Include="lib\docs\html\modules.html" />
+    <Content Include="lib\docs\html\monitor.html" />
+    <Content Include="lib\docs\html\monitor_8dox.html" />
+    <Content Include="lib\docs\html\moving.html" />
+    <Content Include="lib\docs\html\moving_8dox.html" />
+    <Content Include="lib\docs\html\nav_f.png" />
+    <Content Include="lib\docs\html\nav_g.png" />
+    <Content Include="lib\docs\html\nav_h.png" />
+    <Content Include="lib\docs\html\news.html" />
+    <Content Include="lib\docs\html\news_8dox.html" />
+    <Content Include="lib\docs\html\open.png" />
+    <Content Include="lib\docs\html\pages.html" />
+    <Content Include="lib\docs\html\quick.html" />
+    <Content Include="lib\docs\html\quick_8dox.html" />
+    <Content Include="lib\docs\html\rift.html" />
+    <Content Include="lib\docs\html\rift_8dox.html" />
+    <Content Include="lib\docs\html\search\all_0.html" />
+    <Content Include="lib\docs\html\search\all_0.js" />
+    <Content Include="lib\docs\html\search\all_1.html" />
+    <Content Include="lib\docs\html\search\all_1.js" />
+    <Content Include="lib\docs\html\search\all_2.html" />
+    <Content Include="lib\docs\html\search\all_2.js" />
+    <Content Include="lib\docs\html\search\all_3.html" />
+    <Content Include="lib\docs\html\search\all_3.js" />
+    <Content Include="lib\docs\html\search\all_4.html" />
+    <Content Include="lib\docs\html\search\all_4.js" />
+    <Content Include="lib\docs\html\search\all_5.html" />
+    <Content Include="lib\docs\html\search\all_5.js" />
+    <Content Include="lib\docs\html\search\all_6.html" />
+    <Content Include="lib\docs\html\search\all_6.js" />
+    <Content Include="lib\docs\html\search\all_7.html" />
+    <Content Include="lib\docs\html\search\all_7.js" />
+    <Content Include="lib\docs\html\search\all_8.html" />
+    <Content Include="lib\docs\html\search\all_8.js" />
+    <Content Include="lib\docs\html\search\all_9.html" />
+    <Content Include="lib\docs\html\search\all_9.js" />
+    <Content Include="lib\docs\html\search\all_a.html" />
+    <Content Include="lib\docs\html\search\all_a.js" />
+    <Content Include="lib\docs\html\search\all_b.html" />
+    <Content Include="lib\docs\html\search\all_b.js" />
+    <Content Include="lib\docs\html\search\all_c.html" />
+    <Content Include="lib\docs\html\search\all_c.js" />
+    <Content Include="lib\docs\html\search\all_d.html" />
+    <Content Include="lib\docs\html\search\all_d.js" />
+    <Content Include="lib\docs\html\search\all_e.html" />
+    <Content Include="lib\docs\html\search\all_e.js" />
+    <Content Include="lib\docs\html\search\all_f.html" />
+    <Content Include="lib\docs\html\search\all_f.js" />
+    <Content Include="lib\docs\html\search\classes_0.html" />
+    <Content Include="lib\docs\html\search\classes_0.js" />
+    <Content Include="lib\docs\html\search\close.png" />
+    <Content Include="lib\docs\html\search\defines_0.html" />
+    <Content Include="lib\docs\html\search\defines_0.js" />
+    <Content Include="lib\docs\html\search\files_0.html" />
+    <Content Include="lib\docs\html\search\files_0.js" />
+    <Content Include="lib\docs\html\search\files_1.html" />
+    <Content Include="lib\docs\html\search\files_1.js" />
+    <Content Include="lib\docs\html\search\files_2.html" />
+    <Content Include="lib\docs\html\search\files_2.js" />
+    <Content Include="lib\docs\html\search\files_3.html" />
+    <Content Include="lib\docs\html\search\files_3.js" />
+    <Content Include="lib\docs\html\search\files_4.html" />
+    <Content Include="lib\docs\html\search\files_4.js" />
+    <Content Include="lib\docs\html\search\files_5.html" />
+    <Content Include="lib\docs\html\search\files_5.js" />
+    <Content Include="lib\docs\html\search\files_6.html" />
+    <Content Include="lib\docs\html\search\files_6.js" />
+    <Content Include="lib\docs\html\search\files_7.html" />
+    <Content Include="lib\docs\html\search\files_7.js" />
+    <Content Include="lib\docs\html\search\files_8.html" />
+    <Content Include="lib\docs\html\search\files_8.js" />
+    <Content Include="lib\docs\html\search\functions_0.html" />
+    <Content Include="lib\docs\html\search\functions_0.js" />
+    <Content Include="lib\docs\html\search\groups_0.html" />
+    <Content Include="lib\docs\html\search\groups_0.js" />
+    <Content Include="lib\docs\html\search\groups_1.html" />
+    <Content Include="lib\docs\html\search\groups_1.js" />
+    <Content Include="lib\docs\html\search\groups_2.html" />
+    <Content Include="lib\docs\html\search\groups_2.js" />
+    <Content Include="lib\docs\html\search\groups_3.html" />
+    <Content Include="lib\docs\html\search\groups_3.js" />
+    <Content Include="lib\docs\html\search\groups_4.html" />
+    <Content Include="lib\docs\html\search\groups_4.js" />
+    <Content Include="lib\docs\html\search\groups_5.html" />
+    <Content Include="lib\docs\html\search\groups_5.js" />
+    <Content Include="lib\docs\html\search\groups_6.html" />
+    <Content Include="lib\docs\html\search\groups_6.js" />
+    <Content Include="lib\docs\html\search\groups_7.html" />
+    <Content Include="lib\docs\html\search\groups_7.js" />
+    <Content Include="lib\docs\html\search\groups_8.html" />
+    <Content Include="lib\docs\html\search\groups_8.js" />
+    <Content Include="lib\docs\html\search\mag_sel.png" />
+    <Content Include="lib\docs\html\search\nomatches.html" />
+    <Content Include="lib\docs\html\search\pages_0.html" />
+    <Content Include="lib\docs\html\search\pages_0.js" />
+    <Content Include="lib\docs\html\search\pages_1.html" />
+    <Content Include="lib\docs\html\search\pages_1.js" />
+    <Content Include="lib\docs\html\search\pages_2.html" />
+    <Content Include="lib\docs\html\search\pages_2.js" />
+    <Content Include="lib\docs\html\search\pages_3.html" />
+    <Content Include="lib\docs\html\search\pages_3.js" />
+    <Content Include="lib\docs\html\search\pages_4.html" />
+    <Content Include="lib\docs\html\search\pages_4.js" />
+    <Content Include="lib\docs\html\search\pages_5.html" />
+    <Content Include="lib\docs\html\search\pages_5.js" />
+    <Content Include="lib\docs\html\search\pages_6.html" />
+    <Content Include="lib\docs\html\search\pages_6.js" />
+    <Content Include="lib\docs\html\search\pages_7.html" />
+    <Content Include="lib\docs\html\search\pages_7.js" />
+    <Content Include="lib\docs\html\search\pages_8.html" />
+    <Content Include="lib\docs\html\search\pages_8.js" />
+    <Content Include="lib\docs\html\search\search.css" />
+    <Content Include="lib\docs\html\search\search.js" />
+    <Content Include="lib\docs\html\search\search_l.png" />
+    <Content Include="lib\docs\html\search\search_m.png" />
+    <Content Include="lib\docs\html\search\search_r.png" />
+    <Content Include="lib\docs\html\search\typedefs_0.html" />
+    <Content Include="lib\docs\html\search\typedefs_0.js" />
+    <Content Include="lib\docs\html\search\variables_0.html" />
+    <Content Include="lib\docs\html\search\variables_0.js" />
+    <Content Include="lib\docs\html\search\variables_1.html" />
+    <Content Include="lib\docs\html\search\variables_1.js" />
+    <Content Include="lib\docs\html\search\variables_2.html" />
+    <Content Include="lib\docs\html\search\variables_2.js" />
+    <Content Include="lib\docs\html\search\variables_3.html" />
+    <Content Include="lib\docs\html\search\variables_3.js" />
+    <Content Include="lib\docs\html\search\variables_4.html" />
+    <Content Include="lib\docs\html\search\variables_4.js" />
+    <Content Include="lib\docs\html\search\variables_5.html" />
+    <Content Include="lib\docs\html\search\variables_5.js" />
+    <Content Include="lib\docs\html\search\variables_6.html" />
+    <Content Include="lib\docs\html\search\variables_6.js" />
+    <Content Include="lib\docs\html\spaces.svg" />
+    <Content Include="lib\docs\html\structGLFWgammaramp.html" />
+    <Content Include="lib\docs\html\structGLFWimage.html" />
+    <Content Include="lib\docs\html\structGLFWvidmode.html" />
+    <Content Include="lib\docs\html\sync_off.png" />
+    <Content Include="lib\docs\html\sync_on.png" />
+    <Content Include="lib\docs\html\tabs.css" />
+    <Content Include="lib\docs\html\tab_a.png" />
+    <Content Include="lib\docs\html\tab_b.png" />
+    <Content Include="lib\docs\html\tab_h.png" />
+    <Content Include="lib\docs\html\tab_s.png" />
+    <Content Include="lib\docs\html\window.html" />
+    <Content Include="lib\docs\html\window_8dox.html" />
+    <Content Include="lib\include\GLFW\glfw3.h" />
+    <Content Include="lib\include\GLFW\glfw3native.h" />
+    <Content Include="lib\x64\glfw3.dll" />
+    <Content Include="lib\x86\glfw3.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
