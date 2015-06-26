@@ -5,7 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GLFW {
-    public class GLFW3 {
+    public partial class GLFW3 {
+        /*************************************************************************
+         * GL API tokens
+         *************************************************************************/
+        
+        public const int GL_TRUE = 1;
+
+        public const int GL_FALSE = 0;
+
         /*************************************************************************
          * GLFW API tokens
          *************************************************************************/
