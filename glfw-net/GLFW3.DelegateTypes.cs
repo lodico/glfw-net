@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GLFW {
     public partial class GLFW3 {
-
+        #region GLFW API Delegates
         /*! @brief Client API function pointer type.
          *
          *  Generic function pointer used for returning client API function pointers
@@ -280,5 +280,6 @@ namespace GLFW {
          */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void GLFWmonitorfun(GLFWmonitor monitor, int eventStatus);
+        #endregion GLFW API Delegates
     }
 }

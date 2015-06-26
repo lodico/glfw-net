@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GLFW {
-    /*! @brief Opaque monitor object.
-     *
-     *  Opaque monitor object.
-     *
-     *  @ingroup monitor
-     */
+    /// <summary>
+    /// Opaque monitor object pointer.
+    /// </summary>
     [StructLayout(LayoutKind.Explicit)]
     public struct GLFWmonitor {
         [FieldOffsetAttribute(0)]

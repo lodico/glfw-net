@@ -59,10 +59,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GLFW3.DelegateTypes.cs" />
+    <Compile Include="InternalGLFW3.Imports.cs" />
     <Compile Include="GLFW3.Imports.cs" />
     <Compile Include="GLFW3.Constants.cs" />
     <Compile Include="GLFWgammaramp.cs" />
-    <Compile Include="GLFWerror.cs" />
     <Compile Include="GLFWimage.cs" />
     <Compile Include="GLFWvidmode.cs" />
     <Compile Include="GLFWcursor.cs" />

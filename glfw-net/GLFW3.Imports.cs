@@ -1,26 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GLFW {
     public unsafe partial class GLFW3 {
+        #region GLFW.NET Additions
+        /// <summary>
+        /// 
+        /// </summary>
         public const string NATIVE = "glfw3";
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nativeDirectory"></param>
         public static void ConfigureNativesDirectory(string nativeDirectory) {
             if (Directory.Exists(nativeDirectory)) {
                 Environment.SetEnvironmentVariable("Path", Environment.GetEnvironmentVariable("Path") + ";" + Path.GetFullPath(nativeDirectory) + ";");
             }
         }
+        #endregion GLFW.NET Additions
 
-        /*************************************************************************
-         * GLFW API functions
-         *************************************************************************/
-
+        #region GLFW API functions
         /*! @brief Initializes the GLFW library.
          *
          *  This function initializes the GLFW library.  Before most GLFW functions can
@@ -59,7 +61,8 @@ namespace GLFW {
          *  @ingroup init
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        public static extern int glfwInit();
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool glfwInit();
 
         /*! @brief Terminates the GLFW library.
          *
@@ -152,9 +155,9 @@ namespace GLFW {
          *
          *  @ingroup init
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        [return: MarshalAs(UnmanagedType.LPStr)] 
-        public static extern string glfwGetVersionString();
+        public static string glfwGetVersionString() {
+            return new string(InternalGLFW3.glfwGetVersionString());
+        }
 
         /*! @brief Sets the error callback.
          *
@@ -323,9 +326,9 @@ namespace GLFW {
          *
          *  @ingroup monitor
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        [return: MarshalAs(UnmanagedType.LPStr)]
-        public static extern string glfwGetMonitorName(GLFWmonitor monitor);
+        public static string glfwGetMonitorName(GLFWmonitor monitor) {
+            return new string(InternalGLFW3.glfwGetMonitorName(monitor));
+        }
 
         /*! @brief Sets the monitor configuration callback.
          *
@@ -386,7 +389,7 @@ namespace GLFW {
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.LPStruct)]
-        public static extern GLFWvidmode glfwGetVideoModes(ref GLFWmonitor monitor, out int count);
+        public static extern GLFWvidmode glfwGetVideoModes(GLFWmonitor monitor, out int count);
 
         /*! @brief Returns the current mode of the specified monitor.
          *
@@ -415,7 +418,7 @@ namespace GLFW {
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.LPStruct)]
-        public static extern GLFWvidmode glfwGetVideoMode(ref GLFWmonitor monitor);
+        public static extern GLFWvidmode glfwGetVideoMode(GLFWmonitor monitor);
 
         /*! @brief Generates a gamma ramp and sets it for the specified monitor.
          *
@@ -436,7 +439,7 @@ namespace GLFW {
          *  @ingroup monitor
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        public static extern void glfwSetGamma(ref GLFWmonitor monitor, float gamma);
+        public static extern void glfwSetGamma(GLFWmonitor monitor, float gamma);
 
         /*! @brief Returns the current gamma ramp for the specified monitor.
          *
@@ -463,7 +466,7 @@ namespace GLFW {
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.LPStruct)]
-        public static extern GLFWgammaramp glfwGetGammaRamp(ref GLFWmonitor monitor);
+        public static extern GLFWgammaramp glfwGetGammaRamp(GLFWmonitor monitor);
 
         /*! @brief Sets the current gamma ramp for the specified monitor.
          *
@@ -492,7 +495,7 @@ namespace GLFW {
          *  @ingroup monitor
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        public static extern void glfwSetGammaRamp(ref GLFWmonitor monitor, ref GLFWgammaramp ramp);
+        public static extern void glfwSetGammaRamp(GLFWmonitor monitor, ref GLFWgammaramp ramp);
 
         /*! @brief Resets all window hints to their default values.
          *
@@ -2085,9 +2088,9 @@ namespace GLFW {
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        [return: MarshalAs(UnmanagedType.LPStr)]
-        public static extern string glfwGetJoystickName(int joy);
+        public static string glfwGetJoystickName(int joy) {
+            return new string(InternalGLFW3.glfwGetJoystickName(joy));
+        }
 
         /*! @brief Sets the clipboard to the specified string.
          *
@@ -2138,9 +2141,9 @@ namespace GLFW {
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        [return: MarshalAs(UnmanagedType.LPStr)]
-        public static extern string glfwGetClipboardString(GLFWwindow window);
+        public static string glfwGetClipboardString(GLFWwindow window) {
+            return new string(InternalGLFW3.glfwGetClipboardString(window));
+        }
 
         /*! @brief Returns the value of the GLFW timer.
          *
@@ -2338,7 +2341,8 @@ namespace GLFW {
          *  @ingroup context
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        public static extern int glfwExtensionSupported([MarshalAs(UnmanagedType.LPStr)] string extension);
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool glfwExtensionSupported([MarshalAs(UnmanagedType.LPStr)] string extension);
 
         /*! @brief Returns the address of the specified function for the current
          *  context.
@@ -2377,5 +2381,6 @@ namespace GLFW {
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWglproc glfwGetProcAddress([MarshalAs(UnmanagedType.LPStr)] string procname);
+        #endregion GLFW API functions
     }
 }

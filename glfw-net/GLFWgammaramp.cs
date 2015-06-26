@@ -1,57 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
 namespace GLFW {
-    /*! @brief Gamma ramp.
-     *
-     *  This describes the gamma ramp for a monitor.
-     *
-     *  @sa glfwGetGammaRamp glfwSetGammaRamp
-     *
-     *  @ingroup monitor
-     */
+    /// <summary>
+    /// Monitor gamma ramp.
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct GLFWgammaramp {
-        /*! An array of value describing the response of the red channel.
-         */
+        /// <summary>
+        /// An array of value describing the response of the red channel.
+        /// </summary>
         [MarshalAs(UnmanagedType.LPArray)]
         public ushort[] red;
 
-        /*! An array of value describing the response of the green channel.
-         */
+        /// <summary>
+        /// An array of value describing the response of the green channel.
+        /// </summary>
         [MarshalAs(UnmanagedType.LPArray)]
         public ushort[] green;
 
-        /*! An array of value describing the response of the blue channel.
-         */
+        /// <summary>
+        /// An array of value describing the response of the blue channel.
+        /// </summary>
         [MarshalAs(UnmanagedType.LPArray)]
         public ushort[] blue;
 
-        /*! The number of elements in each array.
-         */
-        public uint size;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    internal unsafe struct InternalGLFWgammaramp {
-        /*! An array of value describing the response of the red channel.
-         */
-        public ushort* red;
-
-        /*! An array of value describing the response of the green channel.
-         */
-        public ushort* green;
-
-        /*! An array of value describing the response of the blue channel.
-         */
-        public ushort* blue;
-
-        /*! The number of elements in each array.
-         */
+        /// <summary>
+        /// The number of elements in each array.
+        /// </summary>
         public uint size;
     }
 }
