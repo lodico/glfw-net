@@ -120,6 +120,35 @@ namespace GLFW {
          */
         [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         internal static extern sbyte* glfwGetClipboardString(GLFWwindow window);
+        
+        /*! @brief Returns the currently connected monitors.
+         *
+         *  This function returns an array of handles for all currently connected
+         *  monitors.
+         *
+         *  @param[out] count Where to store the number of monitors in the returned
+         *  array.  This is set to zero if an error occurred.
+         *  @return An array of monitor handles, or `NULL` if an
+         *  [error](@ref error_handling) occurred.
+         *
+         *  @par Pointer Lifetime
+         *  The returned array is allocated and freed by GLFW.  You should not free it
+         *  yourself.  It is guaranteed to be valid only until the monitor configuration
+         *  changes or the library is terminated.
+         *
+         *  @par Thread Safety
+         *  This function may only be called from the main thread.
+         *
+         *  @sa @ref monitor_monitors
+         *  @sa @ref monitor_event
+         *  @sa glfwGetPrimaryMonitor
+         *
+         *  @since Added in GLFW 3.0.
+         *
+         *  @ingroup monitor
+         */
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern GLFWmonitor* glfwGetMonitors(out int count);
         #endregion GLFW API functions
     }
 }

@@ -219,9 +219,16 @@ namespace GLFW {
          *
          *  @ingroup monitor
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        [return: MarshalAs(UnmanagedType.LPArray)]
-        public static extern GLFWmonitor[] glfwGetMonitors(out int count);
+        public static GLFWmonitor[] glfwGetMonitors(out int count) {
+            GLFWmonitor* ptrs = InternalGLFW3.glfwGetMonitors(out count);
+            var monitors = new GLFWmonitor[count];
+            
+            for (int i = 0; i < count; i++) {
+                monitors[i] = (GLFWmonitor)Marshal.PtrToStructure(new IntPtr(ptrs) + (i * sizeof(GLFWmonitor)), typeof(GLFWmonitor));
+            }
+
+            return monitors;
+        }
 
         /*! @brief Returns the primary monitor.
          *
