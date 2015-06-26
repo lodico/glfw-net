@@ -21,3 +21,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+-------------------------------------------------------------------------------
+FAQ/Original Author Intentions
+Do you need to have a copy of the license in binary-only distributions?
+ - No, but it would be really nice if you would mention the GLFW3 project in
+     your credits (would be even cooler if you also mention glfw-net, but that
+     is entirely up to you, and a mention of GLFW3 should take priority).
+     That being said, any distributions that include source code really need
+     to have a copy of this license -- do not rely on a copy of this to be
+     available on the internet indefinitely, something can go hinky.
+
