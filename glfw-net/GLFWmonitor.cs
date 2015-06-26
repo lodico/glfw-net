@@ -10,6 +10,9 @@ namespace GLFW {
         [FieldOffsetAttribute(0)]
         private IntPtr pointer;
 
+        /// <summary>
+        /// NULL GLFWmonitor pointer
+        /// </summary>
         public readonly static GLFWmonitor NULL = new GLFWmonitor { pointer = IntPtr.Zero };
     }
 }
