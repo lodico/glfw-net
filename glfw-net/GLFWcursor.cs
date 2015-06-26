@@ -10,10 +10,6 @@ namespace GLFW {
         [FieldOffsetAttribute(0)]
         private IntPtr pointer;
 
-        private GLFWcursor(IntPtr pointer) {
-            this.pointer = pointer;
-        }
-
-        public readonly static GLFWcursor NULL = new GLFWcursor(IntPtr.Zero);
+        public readonly static GLFWcursor NULL = new GLFWcursor { pointer = IntPtr.Zero };
     }
 }

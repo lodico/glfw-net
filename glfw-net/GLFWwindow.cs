@@ -10,10 +10,6 @@ namespace GLFW {
         [FieldOffsetAttribute(0)]
         private IntPtr pointer;
 
-        private GLFWwindow(IntPtr pointer) {
-            this.pointer = pointer;
-        }
-
-        public readonly static GLFWwindow NULL = new GLFWwindow(IntPtr.Zero);
+        public readonly static GLFWwindow NULL = new GLFWwindow { pointer = IntPtr.Zero };
     }
 }
