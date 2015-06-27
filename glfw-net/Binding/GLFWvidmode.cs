@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace GLFW {
+namespace GLFWnet.Binding {
     /// <summary>
     /// Video mode type.
     /// </summary>

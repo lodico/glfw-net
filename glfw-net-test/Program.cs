@@ -1,41 +1,39 @@
 ﻿using System;
-using System.Diagnostics;
-using GLFW;
+using GLFWnet.Binding;
 
-namespace glfw_net_test {
+namespace GLFWnet.Testing {
     class Program {
         static void Main(string[] args) {
             GLFW3.ConfigureNativesDirectory("../../../../lib/x64/");
 
-            GLFW3.glfwSetErrorCallback(error);
+            GLFW3.glfwSetErrorCallback(callbackError);
 
             bool result = GLFW3.glfwInit();
-            int ma, mi, re;
-            GLFW3.glfwGetVersion(out ma, out mi, out re);
-            Console.WriteLine(result + ": " + ma + "," + mi + "," + re);
             GLFWwindow window = GLFW3.glfwCreateWindow(800, 400, GLFW3.glfwGetVersionString(), GLFWmonitor.NULL, GLFWwindow.NULL);
-            GLFW3.glfwSetClipboardString(window, "testy");
-            Console.WriteLine(GLFW3.glfwGetClipboardString(window));
 
-            int countMonitors;
-            GLFWmonitor[] monitors = GLFW3.glfwGetMonitors(out countMonitors);
+            var imgCursor = new GLFWimage {
+                width = 16, height = 16,
+                pixels = new byte[16 * 16 * 4]
+            };
 
-            Console.WriteLine(countMonitors + " ? " + monitors.Length);
-            foreach (var monitor in monitors) {
-                Console.WriteLine("Monitor name: " + GLFW3.glfwGetMonitorName(monitor));
-                int mxpos, mypos;
-                GLFW3.glfwGetMonitorPhysicalSize(monitor, out mxpos, out mypos);
-                //var ramp = GLFW3.glfwGetGammaRamp(monitor);
-                Console.WriteLine("Monitor position: " + mxpos + ", " + mypos);
+            for (int x = 0; x < imgCursor.width; x++) {
+                for (int y = 0; y < imgCursor.height; y++) {
+                    imgCursor.pixels[((x * imgCursor.width) + y) * 4 + 0] = 0xFF;
+                    imgCursor.pixels[((x * imgCursor.width) + y) * 4 + 1] = 0xFF;
+                    imgCursor.pixels[((x * imgCursor.width) + y) * 4 + 2] = 0xFF;
+                    imgCursor.pixels[((x * imgCursor.width) + y) * 4 + 3] = 0xFF;
+                }
             }
 
-            GLFW3.glfwSetGamma(GLFW3.glfwGetPrimaryMonitor(), 0.5f);
+            var cursor = GLFW3.glfwCreateCursor(imgCursor, 0, 0);
+            Console.WriteLine(cursor);
 
-            GLFW3.glfwSetWindowPosCallback(window, wpos);
-            GLFW3.glfwSetWindowSizeCallback(window, wsz);
+            GLFW3.glfwSetCursor(window, cursor);
+
+            GLFW3.glfwSetWindowPosCallback(window, callbackWindowPos);
+            GLFW3.glfwSetWindowSizeCallback(window, callbackWindowSize);
 
             while (!GLFW3.glfwWindowShouldClose(window)) {
-                //GLFW3.glfwSetWindowTitle(window, new Random().Next().ToString());
                 GLFW3.glfwSwapBuffers(window);
                 GLFW3.glfwPollEvents();
             }
@@ -43,18 +41,16 @@ namespace glfw_net_test {
             GLFW3.glfwTerminate();
         }
 
-        static void error(int code, string description) {
-            Console.WriteLine(code + " :: " + description);
+        static void callbackError(int code, string description) {
+            Console.WriteLine("[glfw_error][ code: {0}, desc: \"{1}\" ]", code, description);
         }
 
-        static void wpos(GLFWwindow window, int xpos, int ypos) {
-            Console.WriteLine(xpos + " :: " + ypos);
-            GLFW3.glfwSetGamma(GLFW3.glfwGetPrimaryMonitor(), 2.0f);
+        static void callbackWindowPos(GLFWwindow window, int xpos, int ypos) {
+            Console.WriteLine("[glfw_window_pos][ x: {0}, y: {1} ]", xpos, ypos);
         }
 
-        static void wsz(GLFWwindow window, int xpos, int ypos) {
-            Console.WriteLine(xpos + " :: " + ypos);
-            GLFW3.glfwSetGamma(GLFW3.glfwGetPrimaryMonitor(), 1.0f);
+        static void callbackWindowSize(GLFWwindow window, int width, int height) {
+            Console.WriteLine("[glfw_window_size][ w: {0}, h: {1} ]", width, height);
         }
     }
 }

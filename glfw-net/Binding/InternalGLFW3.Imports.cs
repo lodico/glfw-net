@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Security;
 
-namespace GLFW {
+namespace GLFWnet.Binding {
     public unsafe partial class InternalGLFW3 {
         #region GLFW API functions
         /*! @brief Returns a string describing the compile-time configuration.
@@ -148,7 +146,33 @@ namespace GLFW {
          *  @ingroup monitor
          */
         [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
-        public static extern GLFWmonitor* glfwGetMonitors(out int count);
+        internal static extern GLFWmonitor* glfwGetMonitors(out int count);
+
+        /*! @brief Returns the current gamma ramp for the specified monitor.
+         *
+         *  This function returns the current gamma ramp of the specified monitor.
+         *
+         *  @param[in] monitor The monitor to query.
+         *  @return The current gamma ramp, or `NULL` if an
+         *  [error](@ref error_handling) occurred.
+         *
+         *  @par Pointer Lifetime
+         *  The returned structure and its arrays are allocated and freed by GLFW.  You
+         *  should not free them yourself.  They are valid until the specified monitor
+         *  is disconnected, this function is called again for that monitor or the
+         *  library is terminated.
+         *
+         *  @par Thread Safety
+         *  This function may only be called from the main thread.
+         *
+         *  @sa @ref monitor_gamma
+         *
+         *  @since Added in GLFW 3.0.
+         *
+         *  @ingroup monitor
+         */
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
+        internal static extern InternalGLFWgammaramp* glfwGetGammaRamp(GLFWmonitor monitor);
         #endregion GLFW API functions
     }
 }

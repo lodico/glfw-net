@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace GLFW {
+namespace GLFWnet.Binding {
     /// <summary>
     /// Monitor gamma ramp.
     /// </summary>
@@ -27,6 +27,14 @@ namespace GLFW {
         /// <summary>
         /// The number of elements in each array.
         /// </summary>
+        public uint size;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe struct InternalGLFWgammaramp {
+        public ushort* red;
+        public ushort* green;
+        public ushort* blue;
         public uint size;
     }
 }

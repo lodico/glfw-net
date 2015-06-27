@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace GLFW {
+namespace GLFWnet.Binding {
     /// <summary>
     /// Opaque cursor object pointer.
     /// </summary>
@@ -14,5 +14,9 @@ namespace GLFW {
         /// NULL GLFWcursor pointer
         /// </summary>
         public readonly static GLFWcursor NULL = new GLFWcursor { pointer = IntPtr.Zero };
+
+        public override string ToString() {
+            return pointer.ToString();
+        }
     }
 }

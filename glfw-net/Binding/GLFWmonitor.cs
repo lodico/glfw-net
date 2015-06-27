@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace GLFW {
+namespace GLFWnet.Binding {
     /// <summary>
     /// Opaque monitor object pointer.
     /// </summary>
@@ -14,5 +14,9 @@ namespace GLFW {
         /// NULL GLFWmonitor pointer
         /// </summary>
         public readonly static GLFWmonitor NULL = new GLFWmonitor { pointer = IntPtr.Zero };
+
+        public override string ToString() {
+            return pointer.ToString();
+        }
     }
 }

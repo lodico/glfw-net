@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace GLFW {
+namespace GLFWnet.Binding {
     /// <summary>
     /// Opaque window object pointer.
     /// </summary>
@@ -14,5 +14,9 @@ namespace GLFW {
         /// NULL GLFWwindow pointer
         /// </summary>
         public readonly static GLFWwindow NULL = new GLFWwindow { pointer = IntPtr.Zero };
+
+        public override string ToString() {
+            return pointer.ToString();
+        }
     }
 }

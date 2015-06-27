@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace GLFW {
+namespace GLFWnet.Binding {
     /// <summary>
     /// Image data.
     /// </summary>
@@ -19,7 +19,7 @@ namespace GLFW {
         /// <summary>
         /// The pixel data of this image, arranged left-to-right, top-to-bottom.
         /// </summary>
-        [MarshalAs(UnmanagedType.LPArray)]
+        [MarshalAs(UnmanagedType.SafeArray)]
         public byte[] pixels;
     }
 }

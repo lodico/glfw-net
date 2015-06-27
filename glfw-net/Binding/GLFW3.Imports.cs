@@ -3,18 +3,18 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace GLFW {
+namespace GLFWnet.Binding {
     public unsafe partial class GLFW3 {
         #region GLFW.NET Additions
         /// <summary>
-        /// 
+        /// The native library name constant.
         /// </summary>
         public const string NATIVE = "glfw3";
 
         /// <summary>
-        /// 
+        /// Adds the specified native directory path to the Path environment variable to facilitate native loading.
         /// </summary>
-        /// <param name="nativeDirectory"></param>
+        /// <param name="nativeDirectory">The directory that the native library is stored in.</param>
         public static void ConfigureNativesDirectory(string nativeDirectory) {
             if (Directory.Exists(nativeDirectory)) {
                 Environment.SetEnvironmentVariable("Path", Environment.GetEnvironmentVariable("Path") + ";" + Path.GetFullPath(nativeDirectory) + ";");
@@ -222,9 +222,9 @@ namespace GLFW {
         public static GLFWmonitor[] glfwGetMonitors(out int count) {
             GLFWmonitor* ptrs = InternalGLFW3.glfwGetMonitors(out count);
             var monitors = new GLFWmonitor[count];
-            
+
             for (int i = 0; i < count; i++) {
-                monitors[i] = (GLFWmonitor)Marshal.PtrToStructure(new IntPtr(ptrs) + (i * sizeof(GLFWmonitor)), typeof(GLFWmonitor));
+                monitors[i] = ptrs[i];
             }
 
             return monitors;
@@ -471,9 +471,27 @@ namespace GLFW {
          *
          *  @ingroup monitor
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        [return: MarshalAs(UnmanagedType.LPStruct)]
-        public static extern GLFWgammaramp glfwGetGammaRamp(GLFWmonitor monitor);
+        public static GLFWgammaramp glfwGetGammaRamp(GLFWmonitor monitor) {
+            var internalRamp = InternalGLFW3.glfwGetGammaRamp(monitor);
+
+            //var ramp = (GLFWgammaramp)Marshal.PtrToStructure(new IntPtr(internalRamp), typeof(GLFWgammaramp));
+            
+            var ramp = new GLFWgammaramp
+            {
+                size  = internalRamp->size,
+                red = new ushort[internalRamp->size],
+                green = new ushort[internalRamp->size],
+                blue = new ushort[internalRamp->size]
+            };
+
+            for (uint i = 0; i < ramp.size; i++) {
+                ramp.red[i] = internalRamp->red[i];
+                ramp.green[i] = internalRamp->green[i];
+                ramp.blue[i] = internalRamp->blue[i];
+            }
+
+            return ramp;
+        }
 
         /*! @brief Sets the current gamma ramp for the specified monitor.
          *
@@ -1660,8 +1678,8 @@ namespace GLFW {
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        public static extern GLFWcursor glfwCreateCursor(ref GLFWimage image, int xhot, int yhot);
+        [DllImport(NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern GLFWcursor glfwCreateCursor(GLFWimage image, int xhot, int yhot);
 
         /*! @brief Creates a cursor with a standard shape.
          *

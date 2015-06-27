@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
-namespace GLFW {
+namespace GLFWnet.Binding {
     public partial class GLFW3 {
         #region GLFW API Delegates
         /*! @brief Client API function pointer type.

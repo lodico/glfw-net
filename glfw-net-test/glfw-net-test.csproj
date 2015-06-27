@@ -41,6 +41,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>GLFWnet.Testing</RootNamespace>
+    <ProjectGuid>{FCDFB025-D03D-4D95-B4C0-B890DFA97B4C}</ProjectGuid>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
