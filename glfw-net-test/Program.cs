@@ -33,6 +33,9 @@ namespace GLFWnet.Testing {
             GLFW3.glfwSetWindowPosCallback(window, callbackWindowPos);
             GLFW3.glfwSetWindowSizeCallback(window, callbackWindowSize);
 
+            var ramp = GLFW3.glfwGetGammaRamp(GLFW3.glfwGetPrimaryMonitor());
+            GLFW3.glfwSetGammaRamp(GLFW3.glfwGetPrimaryMonitor(), ref ramp);
+
             while (!GLFW3.glfwWindowShouldClose(window)) {
                 GLFW3.glfwSwapBuffers(window);
                 GLFW3.glfwPollEvents();
