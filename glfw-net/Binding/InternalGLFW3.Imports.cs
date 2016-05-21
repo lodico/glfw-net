@@ -173,6 +173,76 @@ namespace GLFWnet.Binding {
          */
         [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         internal static extern InternalGLFWgammaramp* glfwGetGammaRamp(GLFWmonitor monitor);
+
+        /*! @brief Sets the current gamma ramp for the specified monitor.
+         *
+         *  This function sets the current gamma ramp for the specified monitor.  The
+         *  original gamma ramp for that monitor is saved by GLFW the first time this
+         *  function is called and is restored by @ref glfwTerminate.
+         *
+         *  @param[in] monitor The monitor whose gamma ramp to set.
+         *  @param[in] ramp The gamma ramp to use.
+         *
+         *  @remarks Gamma ramp sizes other than 256 are not supported by all platforms
+         *  or graphics hardware.
+         *
+         *  @remarks __Windows:__ The gamma ramp size must be 256.
+         *
+         *  @par Pointer Lifetime
+         *  The specified gamma ramp is copied before this function returns.
+         *
+         *  @par Thread Safety
+         *  This function may only be called from the main thread.
+         *
+         *  @sa @ref monitor_gamma
+         *
+         *  @since Added in GLFW 3.0.
+         *
+         *  @ingroup monitor
+         */
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
+        internal static extern void glfwSetGammaRamp(GLFWmonitor monitor, InternalGLFWgammaramp ramp);
+
+        /*! @brief Creates a custom cursor.
+         *
+         *  Creates a new custom cursor image that can be set for a window with @ref
+         *  glfwSetCursor.  The cursor can be destroyed with @ref glfwDestroyCursor.
+         *  Any remaining cursors are destroyed by @ref glfwTerminate.
+         *
+         *  The pixels are 32-bit little-endian RGBA, i.e. eight bits per channel.  They
+         *  are arranged canonically as packed sequential rows, starting from the
+         *  top-left corner.
+         *
+         *  The cursor hotspot is specified in pixels, relative to the upper-left corner
+         *  of the cursor image.  Like all other coordinate systems in GLFW, the X-axis
+         *  points to the right and the Y-axis points down.
+         *
+         *  @param[in] image The desired cursor image.
+         *  @param[in] xhot The desired x-coordinate, in pixels, of the cursor hotspot.
+         *  @param[in] yhot The desired y-coordinate, in pixels, of the cursor hotspot.
+         *
+         *  @return The handle of the created cursor, or `NULL` if an
+         *  [error](@ref error_handling) occurred.
+         *
+         *  @par Pointer Lifetime
+         *  The specified image data is copied before this function returns.
+         *
+         *  @par Reentrancy
+         *  This function may not be called from a callback.
+         *
+         *  @par Thread Safety
+         *  This function may only be called from the main thread.
+         *
+         *  @sa @ref cursor_object
+         *  @sa glfwDestroyCursor
+         *  @sa glfwCreateStandardCursor
+         *
+         *  @since Added in GLFW 3.1.
+         *
+         *  @ingroup input
+         */
+        [DllImport(GLFW3.NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        internal static extern GLFWcursor glfwCreateCursor(InternalGLFWimage image, int xhot, int yhot);
         #endregion GLFW API functions
     }
 }

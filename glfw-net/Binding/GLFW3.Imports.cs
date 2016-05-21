@@ -478,7 +478,6 @@ namespace GLFWnet.Binding {
             
             var ramp = new GLFWgammaramp
             {
-                size  = internalRamp->size,
                 red = new ushort[internalRamp->size],
                 green = new ushort[internalRamp->size],
                 blue = new ushort[internalRamp->size]
@@ -519,8 +518,14 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup monitor
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        public static extern void glfwSetGammaRamp(GLFWmonitor monitor, ref GLFWgammaramp ramp);
+        public static void glfwSetGammaRamp(GLFWmonitor monitor, ref GLFWgammaramp ramp) {
+            fixed (ushort* rampRed = ramp.red, rampBlue = ramp.blue, rampGreen = ramp.green) {
+                var internalRamp = new InternalGLFWgammaramp {
+                    red = rampRed, blue = rampBlue, green = rampGreen, size = ramp.size
+                };
+                InternalGLFW3.glfwSetGammaRamp(monitor, internalRamp);
+            }
+        }
 
         /*! @brief Resets all window hints to their default values.
          *
@@ -1678,8 +1683,12 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        public static extern GLFWcursor glfwCreateCursor(GLFWimage image, int xhot, int yhot);
+        public static GLFWcursor glfwCreateCursor(GLFWimage image, int xhot, int yhot) {
+            fixed (byte* imagePixels = image.pixels) {
+                var internalImage = new InternalGLFWimage { width = image.width, height = image.height, pixels = imagePixels };
+                return InternalGLFW3.glfwCreateCursor(internalImage, xhot, yhot);
+            }
+        }
 
         /*! @brief Creates a cursor with a standard shape.
          *

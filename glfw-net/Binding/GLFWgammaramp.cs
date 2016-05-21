@@ -27,7 +27,7 @@ namespace GLFWnet.Binding {
         /// <summary>
         /// The number of elements in each array.
         /// </summary>
-        public uint size;
+        public uint size {  get { return (uint)InternalUtils.min(red.Length, green.Length, blue.Length); } }
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -35,6 +35,6 @@ namespace GLFWnet.Binding {
         public ushort* red;
         public ushort* green;
         public ushort* blue;
-        public uint size;
+        internal uint size;
     }
 }
