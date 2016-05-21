@@ -22,4 +22,11 @@ namespace GLFWnet.Binding {
         [MarshalAs(UnmanagedType.SafeArray)]
         public byte[] pixels;
     }
+    
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe struct InternalGLFWimage {
+        public int width;
+        public int height;
+        public byte* pixels;
+    }
 }

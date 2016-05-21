@@ -71,6 +71,7 @@
     <Compile Include="Binding\GLFWcursor.cs" />
     <Compile Include="Binding\GLFWmonitor.cs" />
     <Compile Include="Binding\GLFWwindow.cs" />
+    <Compile Include="Binding\InternalUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
