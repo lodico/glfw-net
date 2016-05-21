@@ -190,7 +190,7 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup init
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWerrorfun glfwSetErrorCallback(GLFW3.GLFWerrorfun cbfun);
 
         /*! @brief Returns the currently connected monitors.
@@ -1160,7 +1160,7 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWwindowposfun glfwSetWindowPosCallback(GLFWwindow window, GLFW3.GLFWwindowposfun cbfun);
 
         /*! @brief Sets the size callback for the specified window.
@@ -1187,7 +1187,7 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWwindowsizefun glfwSetWindowSizeCallback(GLFWwindow window, GLFW3.GLFWwindowsizefun cbfun);
 
         /*! @brief Sets the close callback for the specified window.

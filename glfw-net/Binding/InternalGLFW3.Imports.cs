@@ -171,7 +171,7 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup monitor
          */
-        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
         internal static extern InternalGLFWgammaramp* glfwGetGammaRamp(GLFWmonitor monitor);
 
         /*! @brief Sets the current gamma ramp for the specified monitor.
@@ -200,7 +200,7 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup monitor
          */
-        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
         internal static extern void glfwSetGammaRamp(GLFWmonitor monitor, InternalGLFWgammaramp ramp);
 
         /*! @brief Creates a custom cursor.

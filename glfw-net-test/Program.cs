@@ -1,10 +1,17 @@
 ﻿using System;
 using GLFWnet.Binding;
+using System.Runtime.InteropServices;
 
 namespace GLFWnet.Testing {
     class Program {
         static void Main(string[] args) {
+#if X86
+            GLFW3.ConfigureNativesDirectory("../../../../lib/x86/");
+#elif X64
             GLFW3.ConfigureNativesDirectory("../../../../lib/x64/");
+#else
+#error "Unknown target architecture."
+#endif
 
             GLFW3.glfwSetErrorCallback(callbackError);
 
@@ -24,11 +31,9 @@ namespace GLFWnet.Testing {
                     imgCursor.pixels[((x * imgCursor.width) + y) * 4 + 3] = 0xFF;
                 }
             }
-
-            var cursor = GLFW3.glfwCreateCursor(imgCursor, 0, 0);
-            Console.WriteLine(cursor);
-
-            GLFW3.glfwSetCursor(window, cursor);
+            
+            //var cursor = GLFW3.glfwCreateCursor(imgCursor, 0, 0);
+            //GLFW3.glfwSetCursor(window, cursor);
 
             GLFW3.glfwSetWindowPosCallback(window, callbackWindowPos);
             GLFW3.glfwSetWindowSizeCallback(window, callbackWindowSize);
@@ -36,9 +41,9 @@ namespace GLFWnet.Testing {
             var ramp = GLFW3.glfwGetGammaRamp(GLFW3.glfwGetPrimaryMonitor());
             for (int i = 0; i < ramp.size; i++)
             {
-                ramp.red[i] /= 2;
-                ramp.blue[i] *= 2;
-                ramp.green[i] /= 2;
+                ramp.red[i] = ramp.green[i];
+                ramp.blue[i] = ramp.green[i];
+                ramp.green[i] = ramp.green[i];
             }
             GLFW3.glfwSetGammaRamp(GLFW3.glfwGetPrimaryMonitor(), ref ramp);
 
