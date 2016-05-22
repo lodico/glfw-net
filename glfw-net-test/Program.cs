@@ -5,18 +5,12 @@ using System.Runtime.InteropServices;
 namespace GLFWnet.Testing {
     class Program {
         static void Main(string[] args) {
-#if X86
-            GLFW3.ConfigureNativesDirectory("../../../../lib/x86/");
-#elif X64
-            GLFW3.ConfigureNativesDirectory("../../../../lib/x64/");
-#else
-#error "Unknown target architecture."
-#endif
+            GLFW3.ConfigureNativesDirectory("../../../../lib/" + GLFW3.ARCHITECTURE + "/");
 
             GLFW3.glfwSetErrorCallback(callbackError);
 
             bool result = GLFW3.glfwInit();
-            GLFWwindow window = GLFW3.glfwCreateWindow(800, 400, GLFW3.glfwGetVersionString(), GLFWmonitor.NULL, GLFWwindow.NULL);
+            GLFWwindow window = GLFW3.glfwCreateWindow(800, 400, "glfw-net/" + GLFW3.glfwGetVersionString(), GLFWmonitor.NULL, GLFWwindow.NULL);
 
             var imgCursor = new GLFWimage {
                 width = 16, height = 16,
@@ -45,7 +39,7 @@ namespace GLFWnet.Testing {
                 ramp.blue[i] = ramp.green[i];
                 ramp.green[i] = ramp.green[i];
             }
-            GLFW3.glfwSetGammaRamp(GLFW3.glfwGetPrimaryMonitor(), ref ramp);
+            //GLFW3.glfwSetGammaRamp(GLFW3.glfwGetPrimaryMonitor(), ref ramp);
 
             while (!GLFW3.glfwWindowShouldClose(window)) {
                 GLFW3.glfwSwapBuffers(window);

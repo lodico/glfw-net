@@ -12,6 +12,27 @@ namespace GLFWnet.Binding {
         public const string NATIVE = "glfw3";
 
         /// <summary>
+        /// Architecture enumeration.
+        /// </summary>
+        public enum Architecture : int {
+            x86 = 86,
+            x64 = 64,
+            X86 = x86,
+            X64 = x64
+        }
+
+        /// <summary>
+        /// The library compilation architecture.
+        /// </summary>
+#if X86
+        public const Architecture ARCHITECTURE = Architecture.x86;
+#elif X64
+        public const Architecture ARCHITECTURE = Architecture.x64;
+#else
+#error "Unknown target architecture."
+#endif
+
+        /// <summary>
         /// Adds the specified native directory path to the Path environment variable to facilitate native loading.
         /// </summary>
         /// <param name="nativeDirectory">The directory that the native library is stored in.</param>
@@ -521,7 +542,7 @@ namespace GLFWnet.Binding {
         public static void glfwSetGammaRamp(GLFWmonitor monitor, ref GLFWgammaramp ramp) {
             fixed (ushort* rampRed = ramp.red, rampBlue = ramp.blue, rampGreen = ramp.green) {
                 var internalRamp = new InternalGLFWgammaramp {
-                    red = rampRed, blue = rampBlue, green = rampGreen, size = ramp.size
+                    red = rampRed, blue = rampBlue, green = rampGreen, size = (uint)ramp.size
                 };
                 InternalGLFW3.glfwSetGammaRamp(monitor, internalRamp);
             }
