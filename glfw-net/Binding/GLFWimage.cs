@@ -25,8 +25,8 @@ namespace GLFWnet.Binding {
     
     [StructLayout(LayoutKind.Sequential)]
     internal unsafe struct InternalGLFWimage {
-        public int width;
-        public int height;
-        public byte* pixels;
+        internal int width;
+        internal int height;
+        internal byte* pixels;
     }
 }

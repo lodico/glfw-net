@@ -32,9 +32,9 @@ namespace GLFWnet.Binding {
 
     [StructLayout(LayoutKind.Sequential)]
     internal unsafe struct InternalGLFWgammaramp {
-        public ushort* red;
-        public ushort* green;
-        public ushort* blue;
+        internal ushort* red;
+        internal ushort* green;
+        internal ushort* blue;
         internal uint size;
     }
 }
