@@ -18,10 +18,15 @@ namespace GLFWnet.Binding
         /// </summary>
         public enum Architecture : int
         {
-            x86 = 86,
             x64 = 64,
-            X86 = x86,
-            X64 = x64
+
+            X64 = x64,
+
+            [Obsolete]
+            x86 = 86,
+
+            [Obsolete]
+            X86 = x86
         }
 
         /// <summary>

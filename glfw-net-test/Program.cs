@@ -1,18 +1,19 @@
 ﻿using System;
+
 using GLFWnet.Binding;
-using System.Runtime.InteropServices;
+using static GLFWnet.Binding.GLFW3;
 
 namespace GLFWnet.Testing {
     class Program {
         static void Main(string[] args) {
-            GLFW3.ConfigureNativesDirectory("../../../../lib/" + GLFW3.ARCHITECTURE + "/");
+            ConfigureNativesDirectory("../../../../lib/" + ARCHITECTURE + "/");
 
-            Console.WriteLine("Is Vulkan supported? {0}", GLFW3.glfwVulkanSupported());
+            Console.WriteLine("Is Vulkan supported? {0}", glfwVulkanSupported());
 
-            GLFW3.glfwSetErrorCallback(callbackError);
+            glfwSetErrorCallback(callbackError);
 
-            bool result = GLFW3.glfwInit();
-            GLFWwindow window = GLFW3.glfwCreateWindow(800, 400, "glfw-net/" + GLFW3.glfwGetVersionString(), GLFWmonitor.NULL, GLFWwindow.NULL);
+            bool result = glfwInit();
+            GLFWwindow window = glfwCreateWindow(800, 400, "glfw-net/" + glfwGetVersionString(), GLFWmonitor.NULL, GLFWwindow.NULL);
 
             var imgCursor = new GLFWimage {
                 width = 16, height = 16,
@@ -28,27 +29,27 @@ namespace GLFWnet.Testing {
                 }
             }
             
-            var cursor = GLFW3.glfwCreateCursor(imgCursor, 0, 0);
-            GLFW3.glfwSetCursor(window, cursor);
+            var cursor = glfwCreateCursor(imgCursor, 0, 0);
+            glfwSetCursor(window, cursor);
 
-            GLFW3.glfwSetWindowPosCallback(window, callbackWindowPos);
-            GLFW3.glfwSetWindowSizeCallback(window, callbackWindowSize);
+            glfwSetWindowPosCallback(window, callbackWindowPos);
+            glfwSetWindowSizeCallback(window, callbackWindowSize);
 
-            var ramp = GLFW3.glfwGetGammaRamp(GLFW3.glfwGetPrimaryMonitor());
+            var ramp = glfwGetGammaRamp(glfwGetPrimaryMonitor());
             for (int i = 0; i < ramp.size; i++)
             {
                 ramp.red[i] = ramp.green[i];
                 ramp.blue[i] = ramp.green[i];
                 ramp.green[i] = ramp.green[i];
             }
-            //GLFW3.glfwSetGammaRamp(GLFW3.glfwGetPrimaryMonitor(), ref ramp);
+            //glfwSetGammaRamp(glfwGetPrimaryMonitor(), ref ramp);
 
-            while (!GLFW3.glfwWindowShouldClose(window)) {
-                GLFW3.glfwSwapBuffers(window);
-                GLFW3.glfwPollEvents();
+            while (!glfwWindowShouldClose(window)) {
+                glfwSwapBuffers(window);
+                glfwPollEvents();
             }
 
-            GLFW3.glfwTerminate();
+            glfwTerminate();
         }
 
         static void callbackError(int code, string description) {
