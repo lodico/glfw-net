@@ -44,7 +44,7 @@ namespace GLFWnet.Binding
         /// Adds the specified native directory path to the Path environment variable to facilitate native loading.
         /// </summary>
         /// <param name="nativeDirectory">The directory that the native library is stored in.</param>
-        public static void ConfigureNativesDirectory(string nativeDirectory)
+        public static void glfwNetConfigureNativesDirectory(string nativeDirectory)
         {
             if (Directory.Exists(nativeDirectory))
             {

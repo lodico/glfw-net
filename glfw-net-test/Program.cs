@@ -6,7 +6,7 @@ using static GLFWnet.Binding.GLFW3;
 namespace GLFWnet.Testing {
     class Program {
         static void Main(string[] args) {
-            ConfigureNativesDirectory("../../../../lib/" + ARCHITECTURE + "/");
+            glfwNetConfigureNativesDirectory("../../../../lib/" + GLFW_ARCHITECTURE + "/");
 
             Console.WriteLine("Is Vulkan supported? {0}", glfwVulkanSupported());
 
