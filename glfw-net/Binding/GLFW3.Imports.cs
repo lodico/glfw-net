@@ -82,7 +82,7 @@ namespace GLFWnet.Binding
          *  @sa @ref intro_init
          *  @sa glfwTerminate
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @ingroup init
          */
@@ -116,7 +116,7 @@ namespace GLFWnet.Binding
          *  @sa @ref intro_init
          *  @sa glfwInit
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @ingroup init
          */
@@ -144,7 +144,7 @@ namespace GLFWnet.Binding
          *  @sa @ref intro_version
          *  @sa glfwGetVersionString
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @ingroup init
          */
@@ -177,7 +177,7 @@ namespace GLFWnet.Binding
          *  @sa @ref intro_version
          *  @sa glfwGetVersion
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup init
          */
@@ -213,7 +213,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref error_handling
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup init
          */
@@ -242,7 +242,7 @@ namespace GLFWnet.Binding
          *  @sa @ref monitor_event
          *  @sa glfwGetPrimaryMonitor
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -273,7 +273,7 @@ namespace GLFWnet.Binding
          *  @sa @ref monitor_monitors
          *  @sa glfwGetMonitors
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -297,7 +297,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref monitor_properties
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -331,7 +331,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref monitor_properties
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -358,7 +358,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref monitor_properties
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -386,7 +386,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref monitor_event
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -417,7 +417,7 @@ namespace GLFWnet.Binding
          *  @sa @ref monitor_modes
          *  @sa glfwGetVideoMode
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @par
          *  __GLFW 3:__ Changed to return an array of modes for a specific monitor.
@@ -449,7 +449,7 @@ namespace GLFWnet.Binding
          *  @sa @ref monitor_modes
          *  @sa glfwGetVideoModes
          *
-         *  @since Added in GLFW 3.0.  Replaces `glfwGetDesktopMode`.
+         *  @since Added in version 3.0.  Replaces `glfwGetDesktopMode`.
          *
          *  @ingroup monitor
          */
@@ -471,7 +471,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref monitor_gamma
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -497,7 +497,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref monitor_gamma
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -546,7 +546,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref monitor_gamma
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -576,7 +576,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_hints
          *  @sa glfwWindowHint
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -599,7 +599,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_hints
          *  @sa glfwDefaultWindowHints
          *
-         *  @since Added in GLFW 3.0.  Replaces `glfwOpenWindowHint`.
+         *  @since Added in version 3.0.  Replaces `glfwOpenWindowHint`.
          *
          *  @ingroup window
          */
@@ -708,7 +708,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_creation
          *  @sa glfwDestroyWindow
          *
-         *  @since Added in GLFW 3.0.  Replaces `glfwOpenWindow`.
+         *  @since Added in version 3.0.  Replaces `glfwOpenWindow`.
          *
          *  @ingroup window
          */
@@ -737,7 +737,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_creation
          *  @sa glfwCreateWindow
          *
-         *  @since Added in GLFW 3.0.  Replaces `glfwCloseWindow`.
+         *  @since Added in version 3.0.  Replaces `glfwCloseWindow`.
          *
          *  @ingroup window
          */
@@ -756,7 +756,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_close
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -778,7 +778,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_close
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -798,7 +798,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_title
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.
@@ -882,7 +882,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_pos
          *  @sa glfwSetWindowPos
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -911,7 +911,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_pos
          *  @sa glfwGetWindowPos
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.
@@ -942,7 +942,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_size
          *  @sa glfwSetWindowSize
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.
@@ -1057,7 +1057,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_size
          *  @sa glfwGetWindowSize
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.
@@ -1088,7 +1088,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_fbsize
          *  @sa glfwSetFramebufferSizeCallback
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -1124,7 +1124,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_size
          *
-         *  @since Added in GLFW 3.1.
+         *  @since Added in version 3.1.
          *
          *  @ingroup window
          */
@@ -1148,7 +1148,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_iconify
          *  @sa glfwRestoreWindow
          *
-         *  @since Added in GLFW 2.1.
+         *  @since Added in version 2.1.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.
@@ -1174,7 +1174,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_iconify
          *  @sa glfwIconifyWindow
          *
-         *  @since Added in GLFW 2.1.
+         *  @since Added in version 2.1.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.
@@ -1198,7 +1198,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_hide
          *  @sa glfwHideWindow
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -1219,7 +1219,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_hide
          *  @sa glfwShowWindow
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -1269,7 +1269,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_monitor
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -1342,7 +1342,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_attribs
          *
-         *  @since Added in GLFW 3.0.  Replaces `glfwGetWindowParam` and
+         *  @since Added in version 3.0.  Replaces `glfwGetWindowParam` and
          *  `glfwGetGLVersion`.
          *
          *  @ingroup window
@@ -1365,7 +1365,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_userptr
          *  @sa glfwGetWindowUserPointer
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -1385,7 +1385,7 @@ namespace GLFWnet.Binding
          *  @sa @ref window_userptr
          *  @sa glfwSetWindowUserPointer
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -1409,7 +1409,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_pos
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -1433,7 +1433,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_size
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.  Updated callback signature.
@@ -1468,7 +1468,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_close
          *
-         *  @since Added in GLFW 2.5.
+         *  @since Added in version 2.5.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.  Updated callback signature.
@@ -1499,7 +1499,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_refresh
          *
-         *  @since Added in GLFW 2.5.
+         *  @since Added in version 2.5.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.  Updated callback signature.
@@ -1530,7 +1530,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_focus
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -1553,7 +1553,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_iconify
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -1576,7 +1576,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref window_fbsize
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup window
          */
@@ -1610,7 +1610,7 @@ namespace GLFWnet.Binding
          *  @sa @ref events
          *  @sa glfwWaitEvents
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @ingroup window
          */
@@ -1654,7 +1654,7 @@ namespace GLFWnet.Binding
          *  @sa @ref events
          *  @sa glfwPollEvents
          *
-         *  @since Added in GLFW 2.5.
+         *  @since Added in version 2.5.
          *
          *  @ingroup window
          */
@@ -1723,7 +1723,7 @@ namespace GLFWnet.Binding
          *  @sa @ref events
          *  @sa glfwWaitEvents
          *
-         *  @since Added in GLFW 3.1.
+         *  @since Added in version 3.1.
          *
          *  @ingroup window
          */
@@ -1745,7 +1745,7 @@ namespace GLFWnet.Binding
          *
          *  @sa glfwSetInputMode
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup input
          */
@@ -1792,7 +1792,7 @@ namespace GLFWnet.Binding
          *
          *  @sa glfwGetInputMode
          *
-         *  @since Added in GLFW 3.0.  Replaces `glfwEnable` and `glfwDisable`.
+         *  @since Added in version 3.0.  Replaces `glfwEnable` and `glfwDisable`.
          *
          *  @ingroup input
          */
@@ -1888,7 +1888,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref input_key
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.
@@ -1918,7 +1918,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref input_mouse_button
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.
@@ -1958,7 +1958,7 @@ namespace GLFWnet.Binding
          *  @sa @ref cursor_pos
          *  @sa glfwSetCursorPos
          *
-         *  @since Added in GLFW 3.0.  Replaces `glfwGetMousePos`.
+         *  @since Added in version 3.0.  Replaces `glfwGetMousePos`.
          *
          *  @ingroup input
          */
@@ -1998,7 +1998,7 @@ namespace GLFWnet.Binding
          *  @sa @ref cursor_pos
          *  @sa glfwGetCursorPos
          *
-         *  @since Added in GLFW 3.0.  Replaces `glfwSetMousePos`.
+         *  @since Added in version 3.0.  Replaces `glfwSetMousePos`.
          *
          *  @ingroup input
          */
@@ -2039,7 +2039,7 @@ namespace GLFWnet.Binding
          *  @sa glfwDestroyCursor
          *  @sa glfwCreateStandardCursor
          *
-         *  @since Added in GLFW 3.1.
+         *  @since Added in version 3.1.
          *
          *  @ingroup input
          */
@@ -2071,7 +2071,7 @@ namespace GLFWnet.Binding
          *  @sa @ref cursor_object
          *  @sa glfwCreateCursor
          *
-         *  @since Added in GLFW 3.1.
+         *  @since Added in version 3.1.
          *
          *  @ingroup input
          */
@@ -2095,7 +2095,7 @@ namespace GLFWnet.Binding
          *  @sa @ref cursor_object
          *  @sa glfwCreateCursor
          *
-         *  @since Added in GLFW 3.1.
+         *  @since Added in version 3.1.
          *
          *  @ingroup input
          */
@@ -2121,7 +2121,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref cursor_object
          *
-         *  @since Added in GLFW 3.1.
+         *  @since Added in version 3.1.
          *
          *  @ingroup input
          */
@@ -2163,7 +2163,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref input_key
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.  Updated callback signature.
@@ -2203,7 +2203,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref input_char
          *
-         *  @since Added in GLFW 2.4.
+         *  @since Added in version 2.4.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.  Updated callback signature.
@@ -2239,7 +2239,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref input_char
          *
-         *  @since Added in GLFW 3.1.
+         *  @since Added in version 3.1.
          *
          *  @ingroup input
          */
@@ -2268,7 +2268,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref input_mouse_button
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.  Updated callback signature.
@@ -2296,7 +2296,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref cursor_pos
          *
-         *  @since Added in GLFW 3.0.  Replaces `glfwSetMousePosCallback`.
+         *  @since Added in version 3.0.  Replaces `glfwSetMousePosCallback`.
          *
          *  @ingroup input
          */
@@ -2320,7 +2320,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref cursor_enter
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup input
          */
@@ -2347,7 +2347,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref scrolling
          *
-         *  @since Added in GLFW 3.0.  Replaces `glfwSetMouseWheelCallback`.
+         *  @since Added in version 3.0.  Replaces `glfwSetMouseWheelCallback`.
          *
          *  @ingroup input
          */
@@ -2375,7 +2375,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref path_drop
          *
-         *  @since Added in GLFW 3.1.
+         *  @since Added in version 3.1.
          *
          *  @ingroup input
          */
@@ -2394,7 +2394,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref joystick
          *
-         *  @since Added in GLFW 3.0.  Replaces `glfwGetJoystickParam`.
+         *  @since Added in version 3.0.  Replaces `glfwGetJoystickParam`.
          *
          *  @ingroup input
          */
@@ -2421,7 +2421,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref joystick_axis
          *
-         *  @since Added in GLFW 3.0.  Replaces `glfwGetJoystickPos`.
+         *  @since Added in version 3.0.  Replaces `glfwGetJoystickPos`.
          *
          *  @ingroup input
          */
@@ -2449,7 +2449,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref joystick_button
          *
-         *  @since Added in GLFW 2.2.
+         *  @since Added in version 2.2.
          *
          *  @par
          *  __GLFW 3:__ Changed to return a dynamic array.
@@ -2480,7 +2480,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref joystick_name
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup input
          */
@@ -2530,7 +2530,7 @@ namespace GLFWnet.Binding
          *  @sa @ref clipboard
          *  @sa glfwGetClipboardString
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup input
          */
@@ -2558,7 +2558,7 @@ namespace GLFWnet.Binding
          *  @sa @ref clipboard
          *  @sa glfwSetClipboardString
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup input
          */
@@ -2585,7 +2585,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref time
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @ingroup input
          */
@@ -2609,7 +2609,7 @@ namespace GLFWnet.Binding
          *
          *  @sa @ref time
          *
-         *  @since Added in GLFW 2.2.
+         *  @since Added in version 2.2.
          *
          *  @ingroup input
          */
@@ -2682,7 +2682,7 @@ namespace GLFWnet.Binding
          *  @sa @ref context_current
          *  @sa glfwGetCurrentContext
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup context
          */
@@ -2703,7 +2703,7 @@ namespace GLFWnet.Binding
          *  @sa @ref context_current
          *  @sa glfwMakeContextCurrent
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup context
          */
@@ -2725,7 +2725,7 @@ namespace GLFWnet.Binding
          *  @sa @ref buffer_swap
          *  @sa glfwSwapInterval
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @par
          *  __GLFW 3:__ Added window handle parameter.
@@ -2771,7 +2771,7 @@ namespace GLFWnet.Binding
          *  @sa @ref buffer_swap
          *  @sa glfwSwapBuffers
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @ingroup context
          */
@@ -2802,7 +2802,7 @@ namespace GLFWnet.Binding
          *  @sa @ref context_glext
          *  @sa glfwGetProcAddress
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @ingroup context
          */
@@ -2841,7 +2841,7 @@ namespace GLFWnet.Binding
          *  @sa @ref context_glext
          *  @sa glfwExtensionSupported
          *
-         *  @since Added in GLFW 1.0.
+         *  @since Added in version 1.0.
          *
          *  @ingroup context
          */

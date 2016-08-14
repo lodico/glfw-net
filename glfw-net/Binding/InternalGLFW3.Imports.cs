@@ -30,7 +30,7 @@ namespace GLFWnet.Binding {
          *  @sa @ref intro_version
          *  @sa glfwGetVersion
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup init
          */
@@ -115,7 +115,7 @@ namespace GLFWnet.Binding {
          *
          *  @sa @ref monitor_properties
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -142,7 +142,7 @@ namespace GLFWnet.Binding {
          *
          *  @sa @ref joystick_name
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup input
          */
@@ -170,7 +170,7 @@ namespace GLFWnet.Binding {
          *  @sa @ref clipboard
          *  @sa glfwSetClipboardString
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup input
          */
@@ -199,7 +199,7 @@ namespace GLFWnet.Binding {
          *  @sa @ref monitor_event
          *  @sa glfwGetPrimaryMonitor
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -225,7 +225,7 @@ namespace GLFWnet.Binding {
          *
          *  @sa @ref monitor_gamma
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -254,7 +254,7 @@ namespace GLFWnet.Binding {
          *
          *  @sa @ref monitor_gamma
          *
-         *  @since Added in GLFW 3.0.
+         *  @since Added in version 3.0.
          *
          *  @ingroup monitor
          */
@@ -295,7 +295,7 @@ namespace GLFWnet.Binding {
          *  @sa glfwDestroyCursor
          *  @sa glfwCreateStandardCursor
          *
-         *  @since Added in GLFW 3.1.
+         *  @since Added in version 3.1.
          *
          *  @ingroup input
          */
