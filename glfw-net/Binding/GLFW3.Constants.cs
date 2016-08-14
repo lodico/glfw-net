@@ -26,14 +26,32 @@
          *  backward-compatible.
          *  @ingroup init
          */
-        public const int GLFW_VERSION_MINOR = 1;
+        public const int GLFW_VERSION_MINOR = 2;
         /*! @brief The revision number of the GLFW library.
          *
          *  This is incremented when a bug fix release is made that does not contain any
          *  API changes.
          *  @ingroup init
          */
-        public const int GLFW_VERSION_REVISION = 1;
+        public const int GLFW_VERSION_REVISION = 0;
+        /*! @} */
+
+        /*! @name Boolean values
+         *  @{ */
+        /*! @brief One.
+         *
+         *  One.  Seriously.  You don't _need_ to use this symbol in your code.  It's
+         *  just semantic sugar for the number 1.  You can use `1` or `true` or `_True`
+         *  or `GL_TRUE` or whatever you want.
+         */
+        public const int GLFW_TRUE = 1;
+        /*! @brief Zero.
+         *
+         *  Zero.  Seriously.  You don't _need_ to use this symbol in your code.  It's
+         *  just just semantic sugar for the number 0.  You can use `0` or `false` or
+         *  `_False` or `GL_FALSE` or whatever you want.
+         */
+        public const int GLFW_FALSE = 0;
         /*! @} */
 
         /*! @name Key and button actions
@@ -210,6 +228,7 @@
         public const int GLFW_KEY_RIGHT_ALT = 346;
         public const int GLFW_KEY_RIGHT_SUPER = 347;
         public const int GLFW_KEY_MENU = 348;
+
         public const int GLFW_KEY_LAST = GLFW_KEY_MENU;
 
         /*! @} */
@@ -289,12 +308,11 @@
          *  @{ */
         /*! @brief GLFW has not been initialized.
          *
-         *  This occurs if a GLFW function was called that may not be called unless the
+         *  This occurs if a GLFW function was called that must not be called unless the
          *  library is [initialized](@ref intro_init).
          *
-         *  @par Analysis
-         *  Application programmer error.  Initialize GLFW before calling any function
-         *  that requires initialization.
+         *  @analysis Application programmer error.  Initialize GLFW before calling any
+         *  function that requires initialization.
          */
         public const int GLFW_NOT_INITIALIZED = 0x00010001;
         /*! @brief No context is current for this thread.
@@ -303,9 +321,8 @@
          *  current OpenGL or OpenGL ES context but no context is current on the calling
          *  thread.  One such function is @ref glfwSwapInterval.
          *
-         *  @par Analysis
-         *  Application programmer error.  Ensure a context is current before calling
-         *  functions that require a current context.
+         *  @analysis Application programmer error.  Ensure a context is current before
+         *  calling functions that require a current context.
          */
         public const int GLFW_NO_CURRENT_CONTEXT = 0x00010002;
         /*! @brief One of the arguments to the function was an invalid enum value.
@@ -314,8 +331,7 @@
          *  requesting [GLFW_RED_BITS](@ref window_hints_fb) with @ref
          *  glfwGetWindowAttrib.
          *
-         *  @par Analysis
-         *  Application programmer error.  Fix the offending call.
+         *  @analysis Application programmer error.  Fix the offending call.
          */
         public const int GLFW_INVALID_ENUM = 0x00010003;
         /*! @brief One of the arguments to the function was an invalid value.
@@ -324,39 +340,33 @@
          *  requesting a non-existent OpenGL or OpenGL ES version like 2.7.
          *
          *  Requesting a valid but unavailable OpenGL or OpenGL ES version will instead
-         *  result in a @ref GLFW_VERSION_UNAVAILABLE = error.;
+         *  result in a @ref GLFW_VERSION_UNAVAILABLE error.
          *
-         *  @par Analysis
-         *  Application programmer error.  Fix the offending call.
+         *  @analysis Application programmer error.  Fix the offending call.
          */
         public const int GLFW_INVALID_VALUE = 0x00010004;
         /*! @brief A memory allocation failed.
          *
          *  A memory allocation failed.
          *
-         *  @par Analysis
-         *  A bug in GLFW or the underlying operating system.  Report the bug to our
-         *  [issue tracker](https://github.com/glfw/glfw/issues).
+         *  @analysis A bug in GLFW or the underlying operating system.  Report the bug
+         *  to our [issue tracker](https://github.com/glfw/glfw/issues).
          */
         public const int GLFW_OUT_OF_MEMORY = 0x00010005;
-        /*! @brief GLFW could not find support for the requested client API on the
-         *  system.
+        /*! @brief GLFW could not find support for the requested API on the system.
          *
-         *  GLFW could not find support for the requested client API on the system.  If
-         *  emitted by functions other than @ref glfwCreateWindow, no supported client
-         *  API was found.
+         *  GLFW could not find support for the requested API on the system.
          *
-         *  @par Analysis
-         *  The installed graphics driver does not support the requested client API, or
-         *  does not support it via the chosen context creation backend.  Below are
-         *  a few examples.
+         *  @analysis The installed graphics driver does not support the requested
+         *  API, or does not support it via the chosen context creation backend.
+         *  Below are a few examples.
          *
          *  @par
          *  Some pre-installed Windows graphics drivers do not support OpenGL.  AMD only
-         *  supports OpenGL ES via EGL, while Nvidia and Intel only supports it via
+         *  supports OpenGL ES via EGL, while Nvidia and Intel only support it via
          *  a WGL or GLX extension.  OS X does not provide OpenGL ES at all.  The Mesa
          *  EGL, OpenGL and OpenGL ES libraries do not interface with the Nvidia binary
-         *  driver.
+         *  driver.  Older graphics drivers do not support Vulkan.
          */
         public const int GLFW_API_UNAVAILABLE = 0x00010006;
         /*! @brief The requested OpenGL or OpenGL ES version is not available.
@@ -364,10 +374,9 @@
          *  The requested OpenGL or OpenGL ES version (including any requested context
          *  or framebuffer hints) is not available on this machine.
          *
-         *  @par Analysis
-         *  The machine does not support your requirements.  If your application is
-         *  sufficiently flexible, downgrade your requirements and try again.
-         *  Otherwise, inform the user that their machine does not match your
+         *  @analysis The machine does not support your requirements.  If your
+         *  application is sufficiently flexible, downgrade your requirements and try
+         *  again.  Otherwise, inform the user that their machine does not match your
          *  requirements.
          *
          *  @par
@@ -383,10 +392,9 @@
          *  A platform-specific error occurred that does not match any of the more
          *  specific categories.
          *
-         *  @par Analysis
-         *  A bug or configuration error in GLFW, the underlying operating system or
-         *  its drivers, or a lack of required resources.  Report the issue to our
-         *  [issue tracker](https://github.com/glfw/glfw/issues).
+         *  @analysis A bug or configuration error in GLFW, the underlying operating
+         *  system or its drivers, or a lack of required resources.  Report the issue to
+         *  our [issue tracker](https://github.com/glfw/glfw/issues).
          */
         public const int GLFW_PLATFORM_ERROR = 0x00010008;
         /*! @brief The requested format is not supported or available.
@@ -397,8 +405,7 @@
          *  If emitted when querying the clipboard, the contents of the clipboard could
          *  not be converted to the requested format.
          *
-         *  @par Analysis
-         *  If emitted during window creation, one or more
+         *  @analysis If emitted during window creation, one or more
          *  [hard constraints](@ref window_hints_hard) did not match any of the
          *  available pixel formats.  If your application is sufficiently flexible,
          *  downgrade your requirements and try again.  Otherwise, inform the user that
@@ -409,6 +416,14 @@
          *  the user, as appropriate.
          */
         public const int GLFW_FORMAT_UNAVAILABLE = 0x00010009;
+        /*! @brief The specified window does not have an OpenGL or OpenGL ES context.
+         *
+         *  A window that does not have an OpenGL or OpenGL ES context was passed to
+         *  a function that requires it to have one.
+         *
+         *  @analysis Application programmer error.  Fix the offending call.
+         */
+        public const int GLFW_NO_WINDOW_CONTEXT = 0x0001000A;
         /*! @} */
 
         public const int GLFW_FOCUSED = 0x00020001;
@@ -418,6 +433,7 @@
         public const int GLFW_DECORATED = 0x00020005;
         public const int GLFW_AUTO_ICONIFY = 0x00020006;
         public const int GLFW_FLOATING = 0x00020007;
+        public const int GLFW_MAXIMIZED = 0x00020008;
 
         public const int GLFW_RED_BITS = 0x00021001;
         public const int GLFW_GREEN_BITS = 0x00021002;
@@ -445,7 +461,10 @@
         public const int GLFW_OPENGL_DEBUG_CONTEXT = 0x00022007;
         public const int GLFW_OPENGL_PROFILE = 0x00022008;
         public const int GLFW_CONTEXT_RELEASE_BEHAVIOR = 0x00022009;
+        public const int GLFW_CONTEXT_NO_ERROR = 0x0002200A;
+        public const int GLFW_CONTEXT_CREATION_API = 0x0002200B;
 
+        public const int GLFW_NO_API = 0;
         public const int GLFW_OPENGL_API = 0x00030001;
         public const int GLFW_OPENGL_ES_API = 0x00030002;
 
@@ -468,6 +487,9 @@
         public const int GLFW_ANY_RELEASE_BEHAVIOR = 0;
         public const int GLFW_RELEASE_BEHAVIOR_FLUSH = 0x00035001;
         public const int GLFW_RELEASE_BEHAVIOR_NONE = 0x00035002;
+
+        public const int GLFW_NATIVE_CONTEXT_API = 0x00036001;
+        public const int GLFW_EGL_CONTEXT_API = 0x00036002;
 
         /*! @defgroup shapes Standard cursor shapes
          *

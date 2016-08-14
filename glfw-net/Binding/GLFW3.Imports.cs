@@ -3,8 +3,10 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace GLFWnet.Binding {
-    public unsafe partial class GLFW3 {
+namespace GLFWnet.Binding
+{
+    public unsafe partial class GLFW3
+    {
         #region GLFW.NET Additions
         /// <summary>
         /// The native library name constant.
@@ -14,7 +16,8 @@ namespace GLFWnet.Binding {
         /// <summary>
         /// Architecture enumeration.
         /// </summary>
-        public enum Architecture : int {
+        public enum Architecture : int
+        {
             x86 = 86,
             x64 = 64,
             X86 = x86,
@@ -36,8 +39,10 @@ namespace GLFWnet.Binding {
         /// Adds the specified native directory path to the Path environment variable to facilitate native loading.
         /// </summary>
         /// <param name="nativeDirectory">The directory that the native library is stored in.</param>
-        public static void ConfigureNativesDirectory(string nativeDirectory) {
-            if (Directory.Exists(nativeDirectory)) {
+        public static void ConfigureNativesDirectory(string nativeDirectory)
+        {
+            if (Directory.Exists(nativeDirectory))
+            {
                 Environment.SetEnvironmentVariable("Path", Environment.GetEnvironmentVariable("Path") + ";" + Path.GetFullPath(nativeDirectory) + ";");
             }
         }
@@ -176,7 +181,8 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup init
          */
-        public static string glfwGetVersionString() {
+        public static string glfwGetVersionString()
+        {
             return new string(InternalGLFW3.glfwGetVersionString());
         }
 
@@ -240,11 +246,13 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup monitor
          */
-        public static GLFWmonitor[] glfwGetMonitors(out int count) {
+        public static GLFWmonitor[] glfwGetMonitors(out int count)
+        {
             GLFWmonitor* ptrs = InternalGLFW3.glfwGetMonitors(out count);
             var monitors = new GLFWmonitor[count];
 
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 monitors[i] = ptrs[i];
             }
 
@@ -354,7 +362,8 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup monitor
          */
-        public static string glfwGetMonitorName(GLFWmonitor monitor) {
+        public static string glfwGetMonitorName(GLFWmonitor monitor)
+        {
             return new string(InternalGLFW3.glfwGetMonitorName(monitor));
         }
 
@@ -492,11 +501,12 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup monitor
          */
-        public static GLFWgammaramp glfwGetGammaRamp(GLFWmonitor monitor) {
+        public static GLFWgammaramp glfwGetGammaRamp(GLFWmonitor monitor)
+        {
             var internalRamp = InternalGLFW3.glfwGetGammaRamp(monitor);
 
             //var ramp = (GLFWgammaramp)Marshal.PtrToStructure(new IntPtr(internalRamp), typeof(GLFWgammaramp));
-            
+
             var ramp = new GLFWgammaramp
             {
                 red = new ushort[internalRamp->size],
@@ -504,7 +514,8 @@ namespace GLFWnet.Binding {
                 blue = new ushort[internalRamp->size]
             };
 
-            for (uint i = 0; i < ramp.size; i++) {
+            for (uint i = 0; i < ramp.size; i++)
+            {
                 ramp.red[i] = internalRamp->red[i];
                 ramp.green[i] = internalRamp->green[i];
                 ramp.blue[i] = internalRamp->blue[i];
@@ -539,10 +550,16 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup monitor
          */
-        public static void glfwSetGammaRamp(GLFWmonitor monitor, ref GLFWgammaramp ramp) {
-            fixed (ushort* rampRed = ramp.red, rampBlue = ramp.blue, rampGreen = ramp.green) {
-                var internalRamp = new InternalGLFWgammaramp {
-                    red = rampRed, blue = rampBlue, green = rampGreen, size = (uint)ramp.size
+        public static void glfwSetGammaRamp(GLFWmonitor monitor, ref GLFWgammaramp ramp)
+        {
+            fixed (ushort* rampRed = ramp.red, rampBlue = ramp.blue, rampGreen = ramp.green)
+            {
+                var internalRamp = new InternalGLFWgammaramp
+                {
+                    red = rampRed,
+                    blue = rampBlue,
+                    green = rampGreen,
+                    size = (uint)ramp.size
                 };
                 InternalGLFW3.glfwSetGammaRamp(monitor, internalRamp);
             }
@@ -791,6 +808,60 @@ namespace GLFWnet.Binding {
         [DllImport(NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetWindowTitle(GLFWwindow window, [MarshalAs(UnmanagedType.LPStr)] string title);
 
+        /*! @brief Sets the icon for the specified window.
+         *
+         *  This function sets the icon of the specified window.  If passed an array of
+         *  candidate images, those of or closest to the sizes desired by the system are
+         *  selected.  If no images are specified, the window reverts to its default
+         *  icon.
+         *
+         *  The desired image sizes varies depending on platform and system settings.
+         *  The selected images will be rescaled as needed.  Good sizes include 16x16,
+         *  32x32 and 48x48.
+         *
+         *  @param[in] window The window whose icon to set.
+         *  @param[in] count The number of images in the specified array, or zero to
+         *  revert to the default window icon.
+         *  @param[in] images The images to create the icon from.  This is ignored if
+         *  count is zero.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+         *  GLFW_PLATFORM_ERROR.
+         *
+         *  @pointer_lifetime The specified image data is copied before this function
+         *  returns.
+         *
+         *  @remark @osx The GLFW window has no icon, as it is not a document
+         *  window, so this function does nothing.  The dock icon will be the same as
+         *  the application bundle's icon.  For more information on bundles, see the
+         *  [Bundle Programming Guide](https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/)
+         *  in the Mac Developer Library.
+         *
+         *  @thread_safety This function must only be called from the main thread.
+         *
+         *  @sa @ref window_icon
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup window
+         */
+        public static void glfwSetWindowIcon(GLFWwindow window, int count, GLFWimage[] images)
+        {
+            var internalImages = new InternalGLFWimage[count];
+            for (var i = 0; i < count; i++)
+            {
+                fixed (byte* imagePixels = images[i].pixels)
+                {
+                    internalImages[i] = new InternalGLFWimage { width = images[i].width, height = images[i].height, pixels = imagePixels };
+                }
+            }
+
+            fixed (InternalGLFWimage* internalImagesPointer = internalImages)
+            {
+                InternalGLFW3.glfwSetWindowIcon(window, count, internalImagesPointer);
+            }
+        }
+
         /*! @brief Retrieves the position of the client area of the specified window.
          *
          *  This function retrieves the position, in screen coordinates, of the
@@ -880,6 +951,88 @@ namespace GLFWnet.Binding {
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwGetWindowSize(GLFWwindow window, out int width, out int height);
+
+        /*! @brief Sets the size limits of the specified window.
+         *
+         *  This function sets the size limits of the client area of the specified
+         *  window.  If the window is full screen, the size limits only take effect
+         *  once it is made windowed.  If the window is not resizable, this function
+         *  does nothing.
+         *
+         *  The size limits are applied immediately to a windowed mode window and may
+         *  cause it to be resized.
+         *
+         *  The maximum dimensions must be greater than or equal to the minimum
+         *  dimensions and all must be greater than or equal to zero.
+         *
+         *  @param[in] window The window to set limits for.
+         *  @param[in] minwidth The minimum width, in screen coordinates, of the client
+         *  area, or `GLFW_DONT_CARE`.
+         *  @param[in] minheight The minimum height, in screen coordinates, of the
+         *  client area, or `GLFW_DONT_CARE`.
+         *  @param[in] maxwidth The maximum width, in screen coordinates, of the client
+         *  area, or `GLFW_DONT_CARE`.
+         *  @param[in] maxheight The maximum height, in screen coordinates, of the
+         *  client area, or `GLFW_DONT_CARE`.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED, @ref
+         *  GLFW_INVALID_VALUE and @ref GLFW_PLATFORM_ERROR.
+         *
+         *  @remark If you set size limits and an aspect ratio that conflict, the
+         *  results are undefined.
+         *
+         *  @thread_safety This function must only be called from the main thread.
+         *
+         *  @sa @ref window_sizelimits
+         *  @sa glfwSetWindowAspectRatio
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup window
+         */
+        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern void glfwSetWindowSizeLimits(GLFWwindow window, int minwidth, int minheight, int maxwidth, int maxheight);
+
+        /*! @brief Sets the aspect ratio of the specified window.
+         *
+         *  This function sets the required aspect ratio of the client area of the
+         *  specified window.  If the window is full screen, the aspect ratio only takes
+         *  effect once it is made windowed.  If the window is not resizable, this
+         *  function does nothing.
+         *
+         *  The aspect ratio is specified as a numerator and a denominator and both
+         *  values must be greater than zero.  For example, the common 16:9 aspect ratio
+         *  is specified as 16 and 9, respectively.
+         *
+         *  If the numerator and denominator is set to `GLFW_DONT_CARE` then the aspect
+         *  ratio limit is disabled.
+         *
+         *  The aspect ratio is applied immediately to a windowed mode window and may
+         *  cause it to be resized.
+         *
+         *  @param[in] window The window to set limits for.
+         *  @param[in] numer The numerator of the desired aspect ratio, or
+         *  `GLFW_DONT_CARE`.
+         *  @param[in] denom The denominator of the desired aspect ratio, or
+         *  `GLFW_DONT_CARE`.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED, @ref
+         *  GLFW_INVALID_VALUE and @ref GLFW_PLATFORM_ERROR.
+         *
+         *  @remark If you set size limits and an aspect ratio that conflict, the
+         *  results are undefined.
+         *
+         *  @thread_safety This function must only be called from the main thread.
+         *
+         *  @sa @ref window_sizelimits
+         *  @sa glfwSetWindowSizeLimits
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup window
+         */
+        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern void glfwSetWindowAspectRatio(GLFWwindow window, int numer, int denom);
 
         /*! @brief Sets the size of the client area of the specified window.
          *
@@ -1073,6 +1226,35 @@ namespace GLFWnet.Binding {
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwHideWindow(GLFWwindow window);
 
+        /*! @brief Brings the specified window to front and sets input focus.
+         *
+         *  This function brings the specified window to front and sets input focus.
+         *  The window should already be visible and not iconified.
+         *
+         *  By default, both windowed and full screen mode windows are focused when
+         *  initially created.  Set the [GLFW_FOCUSED](@ref window_hints_wnd) to disable
+         *  this behavior.
+         *
+         *  __Do not use this function__ to steal focus from other applications unless
+         *  you are certain that is what the user wants.  Focus stealing can be
+         *  extremely disruptive.
+         *
+         *  @param[in] window The window to give input focus.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+         *  GLFW_PLATFORM_ERROR.
+         *
+         *  @thread_safety This function must only be called from the main thread.
+         *
+         *  @sa @ref window_focus
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup window
+         */
+        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern void glfwFocusWindow(GLFWwindow window);
+
         /*! @brief Returns the monitor that the window uses for full screen mode.
          *
          *  This function returns the handle of the monitor that the specified window is
@@ -1093,6 +1275,56 @@ namespace GLFWnet.Binding {
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFWmonitor glfwGetWindowMonitor(GLFWwindow window);
+
+        /*! @brief Sets the mode, monitor, video mode and placement of a window.
+         *
+         *  This function sets the monitor that the window uses for full screen mode or,
+         *  if the monitor is `NULL`, makes it windowed mode.
+         *
+         *  When setting a monitor, this function updates the width, height and refresh
+         *  rate of the desired video mode and switches to the video mode closest to it.
+         *  The window position is ignored when setting a monitor.
+         *
+         *  When the monitor is `NULL`, the position, width and height are used to
+         *  place the window client area.  The refresh rate is ignored when no monitor
+         *  is specified.
+         *
+         *  If you only wish to update the resolution of a full screen window or the
+         *  size of a windowed mode window, see @ref glfwSetWindowSize.
+         *
+         *  When a window transitions from full screen to windowed mode, this function
+         *  restores any previous window settings such as whether it is decorated,
+         *  floating, resizable, has size or aspect ratio limits, etc..
+         *
+         *  @param[in] window The window whose monitor, size or video mode to set.
+         *  @param[in] monitor The desired monitor, or `NULL` to set windowed mode.
+         *  @param[in] xpos The desired x-coordinate of the upper-left corner of the
+         *  client area.
+         *  @param[in] ypos The desired y-coordinate of the upper-left corner of the
+         *  client area.
+         *  @param[in] width The desired with, in screen coordinates, of the client area
+         *  or video mode.
+         *  @param[in] height The desired height, in screen coordinates, of the client
+         *  area or video mode.
+         *  @param[in] refreshRate The desired refresh rate, in Hz, of the video mode,
+         *  or `GLFW_DONT_CARE`.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+         *  GLFW_PLATFORM_ERROR.
+         *
+         *  @thread_safety This function must only be called from the main thread.
+         *
+         *  @sa @ref window_monitor
+         *  @sa @ref window_full_screen
+         *  @sa glfwGetWindowMonitor
+         *  @sa glfwSetWindowSize
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup window
+         */
+        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern void glfwSetWindowMonitor(GLFWwindow window, GLFWmonitor monitor, int xpos, int ypos, int width, int height, int refreshRate);
 
         /*! @brief Returns an attribute of the specified window.
          *
@@ -1429,6 +1661,53 @@ namespace GLFWnet.Binding {
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwWaitEvents();
 
+        /*! @brief Waits with timeout until events are queued and processes them.
+         *
+         *  This function puts the calling thread to sleep until at least one event is
+         *  available in the event queue, or until the specified timeout is reached.  If
+         *  one or more events are available, it behaves exactly like @ref
+         *  glfwPollEvents, i.e. the events in the queue are processed and the function
+         *  then returns immediately.  Processing events will cause the window and input
+         *  callbacks associated with those events to be called.
+         *
+         *  The timeout value must be a positive finite number.
+         *
+         *  Since not all events are associated with callbacks, this function may return
+         *  without a callback having been called even if you are monitoring all
+         *  callbacks.
+         *
+         *  On some platforms, a window move, resize or menu operation will cause event
+         *  processing to block.  This is due to how event processing is designed on
+         *  those platforms.  You can use the
+         *  [window refresh callback](@ref window_refresh) to redraw the contents of
+         *  your window when necessary during such operations.
+         *
+         *  On some platforms, certain callbacks may be called outside of a call to one
+         *  of the event processing functions.
+         *
+         *  If no windows exist, this function returns immediately.  For synchronization
+         *  of threads in applications that do not create windows, use your threading
+         *  library of choice.
+         *
+         *  Event processing is not required for joystick input to work.
+         *
+         *  @param[in] timeout The maximum amount of time, in seconds, to wait.
+         *
+         *  @reentrancy This function must not be called from a callback.
+         *
+         *  @thread_safety This function must only be called from the main thread.
+         *
+         *  @sa @ref events
+         *  @sa glfwPollEvents
+         *  @sa glfwWaitEvents
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup window
+         */
+        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern void glfwWaitEventsTimeout(double timeout);
+
         /*! @brief Posts an empty event to the event queue.
          *
          *  This function posts an empty event from the current thread to the event
@@ -1519,6 +1798,66 @@ namespace GLFWnet.Binding {
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetInputMode(GLFWwindow window, int mode, int value);
+
+        /*! @brief Returns the localized name of the specified printable key.
+         *
+         *  This function returns the localized name of the specified printable key.
+         *  This is intended for displaying key bindings to the user.
+         *
+         *  If the key is `GLFW_KEY_UNKNOWN`, the scancode is used instead, otherwise
+         *  the scancode is ignored.  If a non-printable key or (if the key is
+         *  `GLFW_KEY_UNKNOWN`) a scancode that maps to a non-printable key is
+         *  specified, this function returns `NULL`.          
+         *
+         *  This behavior allows you to pass in the arguments passed to the
+         *  [key callback](@ref input_key) without modification.
+         *
+         *  The printable keys are:
+         *  - `GLFW_KEY_APOSTROPHE`
+         *  - `GLFW_KEY_COMMA`
+         *  - `GLFW_KEY_MINUS`
+         *  - `GLFW_KEY_PERIOD`
+         *  - `GLFW_KEY_SLASH`
+         *  - `GLFW_KEY_SEMICOLON`
+         *  - `GLFW_KEY_EQUAL`
+         *  - `GLFW_KEY_LEFT_BRACKET`
+         *  - `GLFW_KEY_RIGHT_BRACKET`
+         *  - `GLFW_KEY_BACKSLASH`
+         *  - `GLFW_KEY_WORLD_1`
+         *  - `GLFW_KEY_WORLD_2`
+         *  - `GLFW_KEY_0` to `GLFW_KEY_9`
+         *  - `GLFW_KEY_A` to `GLFW_KEY_Z`
+         *  - `GLFW_KEY_KP_0` to `GLFW_KEY_KP_9`
+         *  - `GLFW_KEY_KP_DECIMAL`
+         *  - `GLFW_KEY_KP_DIVIDE`
+         *  - `GLFW_KEY_KP_MULTIPLY`
+         *  - `GLFW_KEY_KP_SUBTRACT`
+         *  - `GLFW_KEY_KP_ADD`
+         *  - `GLFW_KEY_KP_EQUAL`
+         *
+         *  @param[in] key The key to query, or `GLFW_KEY_UNKNOWN`.
+         *  @param[in] scancode The scancode of the key to query.
+         *  @return The localized name of the key, or `NULL`.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+         *  GLFW_PLATFORM_ERROR.
+         *
+         *  @pointer_lifetime The returned string is allocated and freed by GLFW.  You
+         *  should not free it yourself.  It is valid until the next call to @ref
+         *  glfwGetKeyName, or until the library is terminated.
+         *
+         *  @thread_safety This function must only be called from the main thread.
+         *
+         *  @sa @ref input_key_name
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup input
+         */
+        public static string glfwGetKeyName(int key, int scancode)
+        {
+            return new string(InternalGLFW3.glfwGetKeyName(key, scancode));
+        }
 
         /*! @brief Returns the last reported state of a keyboard key for the specified
          *  window.
@@ -1704,8 +2043,10 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup input
          */
-        public static GLFWcursor glfwCreateCursor(GLFWimage image, int xhot, int yhot) {
-            fixed (byte* imagePixels = image.pixels) {
+        public static GLFWcursor glfwCreateCursor(GLFWimage image, int xhot, int yhot)
+        {
+            fixed (byte* imagePixels = image.pixels)
+            {
                 var internalImage = new InternalGLFWimage { width = image.width, height = image.height, pixels = imagePixels };
                 return InternalGLFW3.glfwCreateCursor(internalImage, xhot, yhot);
             }
@@ -2143,9 +2484,34 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup input
          */
-        public static string glfwGetJoystickName(int joy) {
+        public static string glfwGetJoystickName(int joy)
+        {
             return new string(InternalGLFW3.glfwGetJoystickName(joy));
         }
+
+        /*! @brief Sets the joystick configuration callback.
+         *
+         *  This function sets the joystick configuration callback, or removes the
+         *  currently set callback.  This is called when a joystick is connected to or
+         *  disconnected from the system.
+         *
+         *  @param[in] cbfun The new callback, or `NULL` to remove the currently set
+         *  callback.
+         *  @return The previously set callback, or `NULL` if no callback was set or the
+         *  library had not been [initialized](@ref intro_init).
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED.
+         *
+         *  @thread_safety This function must only be called from the main thread.
+         *
+         *  @sa @ref joystick_event
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup input
+         */
+        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern GLFWjoystickfun glfwSetJoystickCallback(GLFWjoystickfun cbfun);
 
         /*! @brief Sets the clipboard to the specified string.
          *
@@ -2196,7 +2562,8 @@ namespace GLFWnet.Binding {
          *
          *  @ingroup input
          */
-        public static string glfwGetClipboardString(GLFWwindow window) {
+        public static string glfwGetClipboardString(GLFWwindow window)
+        {
             return new string(InternalGLFW3.glfwGetClipboardString(window));
         }
 
@@ -2248,6 +2615,50 @@ namespace GLFWnet.Binding {
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetTime(double time);
+
+        /*! @brief Returns the current value of the raw timer.
+         *
+         *  This function returns the current value of the raw timer, measured in
+         *  1&nbsp;/&nbsp;frequency seconds.  To get the frequency, call @ref
+         *  glfwGetTimerFrequency.
+         *
+         *  @return The value of the timer, or zero if an 
+         *  [error](@ref error_handling) occurred.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED.
+         *
+         *  @thread_safety This function may be called from any thread.
+         *
+         *  @sa @ref time
+         *  @sa glfwGetTimerFrequency
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup input
+         */
+        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern ulong glfwGetTimerValue();
+
+        /*! @brief Returns the frequency, in Hz, of the raw timer.
+         *
+         *  This function returns the frequency, in Hz, of the raw timer.
+         *
+         *  @return The frequency of the timer, in Hz, or zero if an
+         *  [error](@ref error_handling) occurred.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED.
+         *
+         *  @thread_safety This function may be called from any thread.
+         *
+         *  @sa @ref time
+         *  @sa glfwGetTimerValue
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup input
+         */
+        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern ulong glfwGetTimerFrequency();
 
         /*! @brief Makes the context of the specified window current for the calling
          *  thread.
@@ -2435,7 +2846,221 @@ namespace GLFWnet.Binding {
          *  @ingroup context
          */
         [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        public static extern GLFW3.GLFWglproc glfwGetProcAddress([MarshalAs(UnmanagedType.LPStr)] string procname);
+        public static extern GLFWglproc glfwGetProcAddress([MarshalAs(UnmanagedType.LPStr)] string procname);
+
+        /*! @brief Returns whether the Vulkan loader has been found.
+         *
+         *  This function returns whether the Vulkan loader has been found.  This check
+         *  is performed by @ref glfwInit.
+         *
+         *  The availability of a Vulkan loader does not by itself guarantee that window
+         *  surface creation or even device creation is possible.  Call @ref
+         *  glfwGetRequiredInstanceExtensions to check whether the extensions necessary
+         *  for Vulkan surface creation are available and @ref
+         *  glfwGetPhysicalDevicePresentationSupport to check whether a queue family of
+         *  a physical device supports image presentation.
+         *
+         *  @return `GLFW_TRUE` if Vulkan is available, or `GLFW_FALSE` otherwise.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED.
+         *
+         *  @thread_safety This function may be called from any thread.
+         *
+         *  @sa @ref vulkan_support
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup vulkan
+         */
+        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool glfwVulkanSupported();
+
+        /*! @brief Returns the Vulkan instance extensions required by GLFW.
+         *
+         *  This function returns an array of names of Vulkan instance extensions required
+         *  by GLFW for creating Vulkan surfaces for GLFW windows.  If successful, the
+         *  list will always contains `VK_KHR_surface`, so if you don't require any
+         *  additional extensions you can pass this list directly to the
+         *  `VkInstanceCreateInfo` struct.
+         *
+         *  If Vulkan is not available on the machine, this function returns `NULL` and
+         *  generates a @ref GLFW_API_UNAVAILABLE error.  Call @ref glfwVulkanSupported
+         *  to check whether Vulkan is available.
+         *
+         *  If Vulkan is available but no set of extensions allowing window surface
+         *  creation was found, this function returns `NULL`.  You may still use Vulkan
+         *  for off-screen rendering and compute work.
+         *
+         *  @param[out] count Where to store the number of extensions in the returned
+         *  array.  This is set to zero if an error occurred.
+         *  @return An array of ASCII encoded extension names, or `NULL` if an
+         *  [error](@ref error_handling) occurred.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+         *  GLFW_API_UNAVAILABLE.
+         *
+         *  @remarks Additional extensions may be required by future versions of GLFW.
+         *  You should check if any extensions you wish to enable are already in the
+         *  returned array, as it is an error to specify an extension more than once in
+         *  the `VkInstanceCreateInfo` struct.
+         *
+         *  @pointer_lifetime The returned array is allocated and freed by GLFW.  You
+         *  should not free it yourself.  It is guaranteed to be valid only until the
+         *  library is terminated.
+         *
+         *  @thread_safety This function may be called from any thread.
+         *
+         *  @sa @ref vulkan_ext
+         *  @sa glfwCreateWindowSurface
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup vulkan
+         */
+        public static string[] glfwGetRequiredInstanceExtensions(out uint count) {
+            sbyte** internalExtensionNamesPointer = InternalGLFW3.glfwGetRequiredInstanceExtensions(out count);
+            
+            var extensionNames = new string[count];
+            
+            for (var i = 0; i < count; i++) {
+                extensionNames[i] = new string(internalExtensionNamesPointer[i]);
+            }
+
+            return extensionNames;
+        }
+
+#if VK_VERSION_1_0
+
+        /*! @brief Returns the address of the specified Vulkan instance function.
+         *
+         *  This function returns the address of the specified Vulkan core or extension
+         *  function for the specified instance.  If instance is set to `NULL` it can
+         *  return any function exported from the Vulkan loader, including at least the
+         *  following functions:
+         *
+         *  - `vkEnumerateInstanceExtensionProperties`
+         *  - `vkEnumerateInstanceLayerProperties`
+         *  - `vkCreateInstance`
+         *  - `vkGetInstanceProcAddr`
+         *
+         *  If Vulkan is not available on the machine, this function returns `NULL` and
+         *  generates a @ref GLFW_API_UNAVAILABLE error.  Call @ref glfwVulkanSupported
+         *  to check whether Vulkan is available.
+         *
+         *  This function is equivalent to calling `vkGetInstanceProcAddr` with
+         *  a platform-specific query of the Vulkan loader as a fallback.
+         *
+         *  @param[in] instance The Vulkan instance to query, or `NULL` to retrieve
+         *  functions related to instance creation.
+         *  @param[in] procname The ASCII encoded name of the function.
+         *  @return The address of the function, or `NULL` if an
+         *  [error](@ref error_handling) occurred.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+         *  GLFW_API_UNAVAILABLE.
+         *
+         *  @pointer_lifetime The returned function pointer is valid until the library
+         *  is terminated.
+         *
+         *  @thread_safety This function may be called from any thread.
+         *
+         *  @sa @ref vulkan_proc
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup vulkan
+         */
+        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern GLFWvkproc glfwGetInstanceProcAddress(VkInstance instance, const char* procname);
+
+        /*! @brief Returns whether the specified queue family can present images.
+         *
+         *  This function returns whether the specified queue family of the specified
+         *  physical device supports presentation to the platform GLFW was built for.
+         *
+         *  If Vulkan or the required window surface creation instance extensions are
+         *  not available on the machine, or if the specified instance was not created
+         *  with the required extensions, this function returns `GLFW_FALSE` and
+         *  generates a @ref GLFW_API_UNAVAILABLE error.  Call @ref glfwVulkanSupported
+         *  to check whether Vulkan is available and @ref
+         *  glfwGetRequiredInstanceExtensions to check what instance extensions are
+         *  required.
+         *
+         *  @param[in] instance The instance that the physical device belongs to.
+         *  @param[in] device The physical device that the queue family belongs to.
+         *  @param[in] queuefamily The index of the queue family to query.
+         *  @return `GLFW_TRUE` if the queue family supports presentation, or
+         *  `GLFW_FALSE` otherwise.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED, @ref
+         *  GLFW_API_UNAVAILABLE and @ref GLFW_PLATFORM_ERROR.
+         *
+         *  @thread_safety This function may be called from any thread.  For
+         *  synchronization details of Vulkan objects, see the Vulkan specification.
+         *
+         *  @sa @ref vulkan_present
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup vulkan
+         */
+        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern int glfwGetPhysicalDevicePresentationSupport(VkInstance instance, VkPhysicalDevice device, uint32_t queuefamily);
+
+        /*! @brief Creates a Vulkan surface for the specified window.
+         *
+         *  This function creates a Vulkan surface for the specified window.
+         *
+         *  If the Vulkan loader was not found at initialization, this function returns
+         *  `VK_ERROR_INITIALIZATION_FAILED` and generates a @ref GLFW_API_UNAVAILABLE
+         *  error.  Call @ref glfwVulkanSupported to check whether the Vulkan loader was
+         *  found.
+         *
+         *  If the required window surface creation instance extensions are not
+         *  available or if the specified instance was not created with these extensions
+         *  enabled, this function returns `VK_ERROR_EXTENSION_NOT_PRESENT` and
+         *  generates a @ref GLFW_API_UNAVAILABLE error.  Call @ref
+         *  glfwGetRequiredInstanceExtensions to check what instance extensions are
+         *  required.
+         *
+         *  The window surface must be destroyed before the specified Vulkan instance.
+         *  It is the responsibility of the caller to destroy the window surface.  GLFW
+         *  does not destroy it for you.  Call `vkDestroySurfaceKHR` to destroy the
+         *  surface.
+         *
+         *  @param[in] instance The Vulkan instance to create the surface in.
+         *  @param[in] window The window to create the surface for.
+         *  @param[in] allocator The allocator to use, or `NULL` to use the default
+         *  allocator.
+         *  @param[out] surface Where to store the handle of the surface.  This is set
+         *  to `VK_NULL_HANDLE` if an error occurred.
+         *  @return `VK_SUCCESS` if successful, or a Vulkan error code if an
+         *  [error](@ref error_handling) occurred.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED, @ref
+         *  GLFW_API_UNAVAILABLE and @ref GLFW_PLATFORM_ERROR.
+         *
+         *  @remarks If an error occurs before the creation call is made, GLFW returns
+         *  the Vulkan error code most appropriate for the error.  Appropriate use of
+         *  @ref glfwVulkanSupported and @ref glfwGetRequiredInstanceExtensions should
+         *  eliminate almost all occurrences of these errors.
+         *
+         *  @thread_safety This function may be called from any thread.  For
+         *  synchronization details of Vulkan objects, see the Vulkan specification.
+         *
+         *  @sa @ref vulkan_surface
+         *  @sa glfwGetRequiredInstanceExtensions
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup vulkan
+         */
+        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern VkResult glfwCreateWindowSurface(VkInstance instance, GLFWwindow* window, const VkAllocationCallbacks* allocator, VkSurfaceKHR* surface);
+
+/*VK_VERSION_1_0*/
+#endif
         #endregion GLFW API functions
     }
 }

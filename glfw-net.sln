@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "glfw-net", "glfw-net\glfw-net.csproj", "{ADD45DE5-B8CA-422A-851E-2B5E8F49BA2E}"
 EndProject
@@ -10,27 +10,17 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
 		Release|x64 = Release|x64
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ADD45DE5-B8CA-422A-851E-2B5E8F49BA2E}.Debug|x64.ActiveCfg = Debug|x64
 		{ADD45DE5-B8CA-422A-851E-2B5E8F49BA2E}.Debug|x64.Build.0 = Debug|x64
-		{ADD45DE5-B8CA-422A-851E-2B5E8F49BA2E}.Debug|x86.ActiveCfg = Debug|x86
-		{ADD45DE5-B8CA-422A-851E-2B5E8F49BA2E}.Debug|x86.Build.0 = Debug|x86
 		{ADD45DE5-B8CA-422A-851E-2B5E8F49BA2E}.Release|x64.ActiveCfg = Release|x64
 		{ADD45DE5-B8CA-422A-851E-2B5E8F49BA2E}.Release|x64.Build.0 = Release|x64
-		{ADD45DE5-B8CA-422A-851E-2B5E8F49BA2E}.Release|x86.ActiveCfg = Release|x86
-		{ADD45DE5-B8CA-422A-851E-2B5E8F49BA2E}.Release|x86.Build.0 = Release|x86
 		{FCDFB025-D03D-4D95-B4C0-B890DFA97B4C}.Debug|x64.ActiveCfg = Debug|x64
 		{FCDFB025-D03D-4D95-B4C0-B890DFA97B4C}.Debug|x64.Build.0 = Debug|x64
-		{FCDFB025-D03D-4D95-B4C0-B890DFA97B4C}.Debug|x86.ActiveCfg = Debug|x86
-		{FCDFB025-D03D-4D95-B4C0-B890DFA97B4C}.Debug|x86.Build.0 = Debug|x86
 		{FCDFB025-D03D-4D95-B4C0-B890DFA97B4C}.Release|x64.ActiveCfg = Release|x64
 		{FCDFB025-D03D-4D95-B4C0-B890DFA97B4C}.Release|x64.Build.0 = Release|x64
-		{FCDFB025-D03D-4D95-B4C0-B890DFA97B4C}.Release|x86.ActiveCfg = Release|x86
-		{FCDFB025-D03D-4D95-B4C0-B890DFA97B4C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

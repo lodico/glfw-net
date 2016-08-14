@@ -37,6 +37,64 @@ namespace GLFWnet.Binding {
         [DllImport(GLFW3.NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
         internal static extern sbyte* glfwGetVersionString();
 
+        /*! @brief Returns the localized name of the specified printable key.
+         *
+         *  This function returns the localized name of the specified printable key.
+         *  This is intended for displaying key bindings to the user.
+         *
+         *  If the key is `GLFW_KEY_UNKNOWN`, the scancode is used instead, otherwise
+         *  the scancode is ignored.  If a non-printable key or (if the key is
+         *  `GLFW_KEY_UNKNOWN`) a scancode that maps to a non-printable key is
+         *  specified, this function returns `NULL`.          
+         *
+         *  This behavior allows you to pass in the arguments passed to the
+         *  [key callback](@ref input_key) without modification.
+         *
+         *  The printable keys are:
+         *  - `GLFW_KEY_APOSTROPHE`
+         *  - `GLFW_KEY_COMMA`
+         *  - `GLFW_KEY_MINUS`
+         *  - `GLFW_KEY_PERIOD`
+         *  - `GLFW_KEY_SLASH`
+         *  - `GLFW_KEY_SEMICOLON`
+         *  - `GLFW_KEY_EQUAL`
+         *  - `GLFW_KEY_LEFT_BRACKET`
+         *  - `GLFW_KEY_RIGHT_BRACKET`
+         *  - `GLFW_KEY_BACKSLASH`
+         *  - `GLFW_KEY_WORLD_1`
+         *  - `GLFW_KEY_WORLD_2`
+         *  - `GLFW_KEY_0` to `GLFW_KEY_9`
+         *  - `GLFW_KEY_A` to `GLFW_KEY_Z`
+         *  - `GLFW_KEY_KP_0` to `GLFW_KEY_KP_9`
+         *  - `GLFW_KEY_KP_DECIMAL`
+         *  - `GLFW_KEY_KP_DIVIDE`
+         *  - `GLFW_KEY_KP_MULTIPLY`
+         *  - `GLFW_KEY_KP_SUBTRACT`
+         *  - `GLFW_KEY_KP_ADD`
+         *  - `GLFW_KEY_KP_EQUAL`
+         *
+         *  @param[in] key The key to query, or `GLFW_KEY_UNKNOWN`.
+         *  @param[in] scancode The scancode of the key to query.
+         *  @return The localized name of the key, or `NULL`.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+         *  GLFW_PLATFORM_ERROR.
+         *
+         *  @pointer_lifetime The returned string is allocated and freed by GLFW.  You
+         *  should not free it yourself.  It is valid until the next call to @ref
+         *  glfwGetKeyName, or until the library is terminated.
+         *
+         *  @thread_safety This function must only be called from the main thread.
+         *
+         *  @sa @ref input_key_name
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup input
+         */
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern sbyte* glfwGetKeyName(int key, int scancode);
+
         /*! @brief Returns the name of the specified monitor.
          *
          *  This function returns a human-readable name, encoded as UTF-8, of the
@@ -243,6 +301,91 @@ namespace GLFWnet.Binding {
          */
         [DllImport(GLFW3.NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
         internal static extern GLFWcursor glfwCreateCursor(InternalGLFWimage image, int xhot, int yhot);
+
+        /*! @brief Sets the icon for the specified window.
+         *
+         *  This function sets the icon of the specified window.  If passed an array of
+         *  candidate images, those of or closest to the sizes desired by the system are
+         *  selected.  If no images are specified, the window reverts to its default
+         *  icon.
+         *
+         *  The desired image sizes varies depending on platform and system settings.
+         *  The selected images will be rescaled as needed.  Good sizes include 16x16,
+         *  32x32 and 48x48.
+         *
+         *  @param[in] window The window whose icon to set.
+         *  @param[in] count The number of images in the specified array, or zero to
+         *  revert to the default window icon.
+         *  @param[in] images The images to create the icon from.  This is ignored if
+         *  count is zero.
+         *
+         *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+         *  GLFW_PLATFORM_ERROR.
+         *
+         *  @pointer_lifetime The specified image data is copied before this function
+         *  returns.
+         *
+         *  @remark @osx The GLFW window has no icon, as it is not a document
+         *  window, so this function does nothing.  The dock icon will be the same as
+         *  the application bundle's icon.  For more information on bundles, see the
+         *  [Bundle Programming Guide](https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/)
+         *  in the Mac Developer Library.
+         *
+         *  @thread_safety This function must only be called from the main thread.
+         *
+         *  @sa @ref window_icon
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup window
+         */
+        [DllImport(GLFW3.NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        internal static extern void glfwSetWindowIcon(GLFWwindow window, int count, InternalGLFWimage* images);
+
+        /*! @brief Returns the Vulkan instance extensions required by GLFW.
+                 *
+                 *  This function returns an array of names of Vulkan instance extensions required
+                 *  by GLFW for creating Vulkan surfaces for GLFW windows.  If successful, the
+                 *  list will always contains `VK_KHR_surface`, so if you don't require any
+                 *  additional extensions you can pass this list directly to the
+                 *  `VkInstanceCreateInfo` struct.
+                 *
+                 *  If Vulkan is not available on the machine, this function returns `NULL` and
+                 *  generates a @ref GLFW_API_UNAVAILABLE error.  Call @ref glfwVulkanSupported
+                 *  to check whether Vulkan is available.
+                 *
+                 *  If Vulkan is available but no set of extensions allowing window surface
+                 *  creation was found, this function returns `NULL`.  You may still use Vulkan
+                 *  for off-screen rendering and compute work.
+                 *
+                 *  @param[out] count Where to store the number of extensions in the returned
+                 *  array.  This is set to zero if an error occurred.
+                 *  @return An array of ASCII encoded extension names, or `NULL` if an
+                 *  [error](@ref error_handling) occurred.
+                 *
+                 *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+                 *  GLFW_API_UNAVAILABLE.
+                 *
+                 *  @remarks Additional extensions may be required by future versions of GLFW.
+                 *  You should check if any extensions you wish to enable are already in the
+                 *  returned array, as it is an error to specify an extension more than once in
+                 *  the `VkInstanceCreateInfo` struct.
+                 *
+                 *  @pointer_lifetime The returned array is allocated and freed by GLFW.  You
+                 *  should not free it yourself.  It is guaranteed to be valid only until the
+                 *  library is terminated.
+                 *
+                 *  @thread_safety This function may be called from any thread.
+                 *
+                 *  @sa @ref vulkan_ext
+                 *  @sa glfwCreateWindowSurface
+                 *
+                 *  @since Added in version 3.2.
+                 *
+                 *  @ingroup vulkan
+                 */
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern sbyte** glfwGetRequiredInstanceExtensions(out uint count);
         #endregion GLFW API functions
     }
 }

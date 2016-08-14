@@ -7,6 +7,8 @@ namespace GLFWnet.Testing {
         static void Main(string[] args) {
             GLFW3.ConfigureNativesDirectory("../../../../lib/" + GLFW3.ARCHITECTURE + "/");
 
+            Console.WriteLine("Is Vulkan supported? {0}", GLFW3.glfwVulkanSupported());
+
             GLFW3.glfwSetErrorCallback(callbackError);
 
             bool result = GLFW3.glfwInit();
@@ -26,8 +28,8 @@ namespace GLFWnet.Testing {
                 }
             }
             
-            //var cursor = GLFW3.glfwCreateCursor(imgCursor, 0, 0);
-            //GLFW3.glfwSetCursor(window, cursor);
+            var cursor = GLFW3.glfwCreateCursor(imgCursor, 0, 0);
+            GLFW3.glfwSetCursor(window, cursor);
 
             GLFW3.glfwSetWindowPosCallback(window, callbackWindowPos);
             GLFW3.glfwSetWindowSizeCallback(window, callbackWindowSize);

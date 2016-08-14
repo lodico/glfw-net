@@ -1,7 +1,9 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace GLFWnet.Binding {
-    public partial class GLFW3 {
+namespace GLFWnet.Binding
+{
+    public partial class GLFW3
+    {
         #region GLFW API Delegates
         /*! @brief Client API function pointer type.
          *
@@ -12,6 +14,21 @@ namespace GLFWnet.Binding {
          */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void GLFWglproc();
+
+        /*! @brief Vulkan API function pointer type.
+         *
+         *  Generic function pointer used for returning Vulkan API function pointers
+         *  without forcing a cast from a regular pointer.
+         *
+         *  @sa @ref vulkan_proc
+         *  @sa glfwGetInstanceProcAddress
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup vulkan
+         */
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void GLFWvkproc();
 
         /*! @brief The function signature for error callbacks.
          *
@@ -43,7 +60,7 @@ namespace GLFWnet.Binding {
          */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void GLFWwindowposfun(GLFWwindow window, int xpos, int ypos);
-        
+
         /*! @brief The function signature for window resize callbacks.
          *
          *  This is the function signature for window size callback functions.
@@ -114,7 +131,7 @@ namespace GLFWnet.Binding {
          *  @ingroup window
          */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void GLFWwindowiconifyfun(GLFWwindow window, int iconified);
+        public delegate void GLFWwindowiconifyfun(GLFWwindow window, [MarshalAs(UnmanagedType.Bool)] bool iconified);
 
         /*! @brief The function signature for framebuffer resize callbacks.
          *
@@ -274,6 +291,24 @@ namespace GLFWnet.Binding {
          */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void GLFWmonitorfun(GLFWmonitor monitor, int eventStatus);
+
+        /*! @brief The function signature for joystick configuration callbacks.
+         *
+         *  This is the function signature for joystick configuration callback
+         *  functions.
+         *
+         *  @param[in] joy The joystick that was connected or disconnected.
+         *  @param[in] event One of `GLFW_CONNECTED` or `GLFW_DISCONNECTED`.
+         *
+         *  @sa @ref joystick_event
+         *  @sa glfwSetJoystickCallback
+         *
+         *  @since Added in version 3.2.
+         *
+         *  @ingroup input
+         */
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void GLFWjoystickfun(int joy, int eventStatus);
         #endregion GLFW API Delegates
+        }
     }
-}
