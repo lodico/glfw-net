@@ -33,9 +33,9 @@ namespace GLFWnet.Binding
         /// The library compilation architecture.
         /// </summary>
 #if X86
-        public const Architecture ARCHITECTURE = Architecture.x86;
+        public const Architecture GLFW_ARCHITECTURE = Architecture.x86;
 #elif X64
-        public const Architecture ARCHITECTURE = Architecture.x64;
+        public const Architecture GLFW_ARCHITECTURE = Architecture.x64;
 #else
 #error "Unknown target architecture."
 #endif
