@@ -1,11 +1,13 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace GLFWnet.Binding {
+namespace GLFWnet.Binding
+{
     /// <summary>
     /// Video mode type.
     /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = sizeof(int) * 6)]
-    public struct GLFWvidmode {
+    public struct GLFWvidmode
+    {
         /// <summary>
         ///  The width, in screen coordinates, of the video mode.
         /// </summary>

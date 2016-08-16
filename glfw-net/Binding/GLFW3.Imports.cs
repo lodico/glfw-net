@@ -2,6 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Text;
 
 namespace GLFWnet.Binding
 {
@@ -22,11 +23,13 @@ namespace GLFWnet.Binding
 
             X64 = x64,
 
+#pragma warning disable CS0612
             [Obsolete]
             x86 = 86,
 
             [Obsolete]
             X86 = x86
+#pragma warning restore CS0612
         }
 
         /// <summary>
@@ -91,7 +94,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup init
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool glfwInit();
 
@@ -125,7 +128,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup init
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwTerminate();
 
         /*! @brief Retrieves the version of the GLFW library.
@@ -153,7 +156,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup init
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwGetVersion(out int major, out int minor, out int rev);
 
         /*! @brief Returns a string describing the compile-time configuration.
@@ -282,7 +285,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup monitor
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFWmonitor glfwGetPrimaryMonitor();
 
         /*! @brief Returns the position of the monitor's viewport on the virtual screen.
@@ -306,7 +309,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup monitor
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwGetMonitorPos(GLFWmonitor monitor, out int xpos, out int ypos);
 
         /*! @brief Returns the physical size of the monitor.
@@ -340,7 +343,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup monitor
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwGetMonitorPhysicalSize(GLFWmonitor monitor, out int widthMM, out int heightMM);
 
         /*! @brief Returns the name of the specified monitor.
@@ -395,7 +398,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup monitor
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWmonitorfun glfwSetMonitorCallback(GLFW3.GLFWmonitorfun cbfun);
 
         /*! @brief Returns the available video modes for the specified monitor.
@@ -429,7 +432,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup monitor
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.LPStruct)]
         public static extern GLFWvidmode glfwGetVideoModes(GLFWmonitor monitor, out int count);
 
@@ -458,7 +461,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup monitor
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.LPStruct)]
         public static extern GLFWvidmode glfwGetVideoMode(GLFWmonitor monitor);
 
@@ -480,7 +483,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup monitor
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetGamma(GLFWmonitor monitor, float gamma);
 
         /*! @brief Returns the current gamma ramp for the specified monitor.
@@ -585,7 +588,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwDefaultWindowHints();
 
         /*! @brief Sets the specified window hint to the desired value.
@@ -608,7 +611,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwWindowHint(int target, int hint);
 
         /*! @brief Creates a window and its associated context.
@@ -717,8 +720,13 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        public static extern GLFWwindow glfwCreateWindow(int width, int height, [MarshalAs(UnmanagedType.LPStr)] string title, GLFWmonitor monitor, GLFWwindow share);
+        public static GLFWwindow glfwCreateWindow(int width, int height, string title, GLFWmonitor monitor, GLFWwindow share)
+        {
+            fixed (byte* titleBytes = Encoding.UTF8.GetBytes(title))
+            {
+                return InternalGLFW3.glfwCreateWindow(width, height, titleBytes, monitor, share);
+            }
+        }
 
         /*! @brief Destroys the specified window and its context.
          *
@@ -746,7 +754,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwDestroyWindow(GLFWwindow window);
 
         /*! @brief Checks the close flag of the specified window.
@@ -810,8 +818,13 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        public static extern void glfwSetWindowTitle(GLFWwindow window, [MarshalAs(UnmanagedType.LPStr)] string title);
+        public static void glfwSetWindowTitle(GLFWwindow window, string title)
+        {
+            fixed (byte* titleBytes = Encoding.UTF8.GetBytes(title))
+            {
+                InternalGLFW3.glfwSetWindowTitle(window, titleBytes);
+            }
+        }
 
         /*! @brief Sets the icon for the specified window.
          *
@@ -891,7 +904,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwGetWindowPos(GLFWwindow window, out int xpos, out int ypos);
 
         /*! @brief Sets the position of the client area of the specified window.
@@ -923,7 +936,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetWindowPos(GLFWwindow window, int xpos, int ypos);
 
         /*! @brief Retrieves the size of the client area of the specified window.
@@ -954,7 +967,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwGetWindowSize(GLFWwindow window, out int width, out int height);
 
         /*! @brief Sets the size limits of the specified window.
@@ -995,7 +1008,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetWindowSizeLimits(GLFWwindow window, int minwidth, int minheight, int maxwidth, int maxheight);
 
         /*! @brief Sets the aspect ratio of the specified window.
@@ -1036,7 +1049,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetWindowAspectRatio(GLFWwindow window, int numer, int denom);
 
         /*! @brief Sets the size of the client area of the specified window.
@@ -1069,7 +1082,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetWindowSize(GLFWwindow window, int width, int height);
 
         /*! @brief Retrieves the size of the framebuffer of the specified window.
@@ -1097,7 +1110,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwGetFramebufferSize(GLFWwindow window, out int width, out int height);
 
         /*! @brief Retrieves the size of the frame of the window.
@@ -1133,7 +1146,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwGetWindowFrameSize(GLFWwindow window, out int left, out int top, out int right, out int bottom);
 
         /*! @brief Iconifies the specified window.
@@ -1160,7 +1173,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwIconifyWindow(GLFWwindow window);
 
         /*! @brief Restores the specified window.
@@ -1186,7 +1199,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwRestoreWindow(GLFWwindow window);
 
         /*! @brief Makes the specified window visible.
@@ -1207,7 +1220,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwShowWindow(GLFWwindow window);
 
         /*! @brief Hides the specified window.
@@ -1228,7 +1241,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwHideWindow(GLFWwindow window);
 
         /*! @brief Brings the specified window to front and sets input focus.
@@ -1257,7 +1270,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwFocusWindow(GLFWwindow window);
 
         /*! @brief Returns the monitor that the window uses for full screen mode.
@@ -1278,7 +1291,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFWmonitor glfwGetWindowMonitor(GLFWwindow window);
 
         /*! @brief Sets the mode, monitor, video mode and placement of a window.
@@ -1328,7 +1341,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetWindowMonitor(GLFWwindow window, GLFWmonitor monitor, int xpos, int ypos, int width, int height, int refreshRate);
 
         /*! @brief Returns an attribute of the specified window.
@@ -1352,7 +1365,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern int glfwGetWindowAttrib(GLFWwindow window, int attrib);
 
         /*! @brief Sets the user pointer of the specified window.
@@ -1374,7 +1387,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetWindowUserPointer(GLFWwindow window, IntPtr pointer);
 
         /*! @brief Returns the user pointer of the specified window.
@@ -1394,7 +1407,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern IntPtr glfwGetWindowUserPointer(GLFWwindow window);
 
         /*! @brief Sets the position callback for the specified window.
@@ -1480,7 +1493,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWwindowclosefun glfwSetWindowCloseCallback(GLFWwindow window, GLFW3.GLFWwindowclosefun cbfun);
 
         /*! @brief Sets the refresh callback for the specified window.
@@ -1511,7 +1524,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWwindowrefreshfun glfwSetWindowRefreshCallback(GLFWwindow window, GLFW3.GLFWwindowrefreshfun cbfun);
 
         /*! @brief Sets the focus callback for the specified window.
@@ -1539,7 +1552,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWwindowfocusfun glfwSetWindowFocusCallback(GLFWwindow window, GLFW3.GLFWwindowfocusfun cbfun);
 
         /*! @brief Sets the iconify callback for the specified window.
@@ -1562,7 +1575,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWwindowiconifyfun glfwSetWindowIconifyCallback(GLFWwindow window, GLFW3.GLFWwindowiconifyfun cbfun);
 
         /*! @brief Sets the framebuffer resize callback for the specified window.
@@ -1585,7 +1598,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWframebuffersizefun glfwSetFramebufferSizeCallback(GLFWwindow window, GLFW3.GLFWframebuffersizefun cbfun);
 
         /*! @brief Processes all pending events.
@@ -1663,7 +1676,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwWaitEvents();
 
         /*! @brief Waits with timeout until events are queued and processes them.
@@ -1710,7 +1723,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwWaitEventsTimeout(double timeout);
 
         /*! @brief Posts an empty event to the event queue.
@@ -1732,7 +1745,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup window
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwPostEmptyEvent();
 
         /*! @brief Returns the value of an input option for the specified window.
@@ -1754,7 +1767,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern int glfwGetInputMode(GLFWwindow window, int mode);
 
         /*! @brief Sets an input option for the specified window.
@@ -1801,7 +1814,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetInputMode(GLFWwindow window, int mode, int value);
 
         /*! @brief Returns the localized name of the specified printable key.
@@ -1900,7 +1913,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern int glfwGetKey(GLFWwindow window, int key);
 
         /*! @brief Returns the last reported state of a mouse button for the specified
@@ -1930,7 +1943,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern int glfwGetMouseButton(GLFWwindow window, int button);
 
         /*! @brief Retrieves the position of the cursor relative to the client area of
@@ -1967,7 +1980,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwGetCursorPos(GLFWwindow window, out double xpos, out double ypos);
 
         /*! @brief Sets the position of the cursor, relative to the client area of the
@@ -2007,7 +2020,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetCursorPos(GLFWwindow window, double xpos, double ypos);
 
         /*! @brief Creates a custom cursor.
@@ -2080,7 +2093,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFWcursor glfwCreateStandardCursor(int shape);
 
         /*! @brief Destroys a cursor.
@@ -2104,7 +2117,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwDestroyCursor(GLFWcursor cursor);
 
         /*! @brief Sets the cursor for the window.
@@ -2130,7 +2143,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetCursor(GLFWwindow window, GLFWcursor cursor);
 
         /*! @brief Sets the key callback.
@@ -2175,7 +2188,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWkeyfun glfwSetKeyCallback(GLFWwindow window, GLFW3.GLFWkeyfun cbfun);
 
         /*! @brief Sets the Unicode character callback.
@@ -2215,7 +2228,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWcharfun glfwSetCharCallback(GLFWwindow window, GLFW3.GLFWcharfun cbfun);
 
         /*! @brief Sets the Unicode character with modifiers callback.
@@ -2248,7 +2261,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWcharmodsfun glfwSetCharModsCallback(GLFWwindow window, GLFW3.GLFWcharmodsfun cbfun);
 
         /*! @brief Sets the mouse button callback.
@@ -2280,7 +2293,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWmousebuttonfun glfwSetMouseButtonCallback(GLFWwindow window, GLFW3.GLFWmousebuttonfun cbfun);
 
         /*! @brief Sets the cursor position callback.
@@ -2305,7 +2318,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWcursorposfun glfwSetCursorPosCallback(GLFWwindow window, GLFW3.GLFWcursorposfun cbfun);
 
         /*! @brief Sets the cursor enter/exit callback.
@@ -2329,7 +2342,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWcursorenterfun glfwSetCursorEnterCallback(GLFWwindow window, GLFW3.GLFWcursorenterfun cbfun);
 
         /*! @brief Sets the scroll callback.
@@ -2356,7 +2369,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWscrollfun glfwSetScrollCallback(GLFWwindow window, GLFW3.GLFWscrollfun cbfun);
 
         /*! @brief Sets the file drop callback.
@@ -2384,7 +2397,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFW3.GLFWdropfun glfwSetDropCallback(GLFWwindow window, GLFW3.GLFWdropfun cbfun);
 
         /*! @brief Returns whether the specified joystick is present.
@@ -2403,7 +2416,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern int glfwJoystickPresent(int joy);
 
         /*! @brief Returns the values of all axes of the specified joystick.
@@ -2430,7 +2443,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.LPArray)]
         public static extern float[] glfwGetJoystickAxes(int joy, out int count);
 
@@ -2461,7 +2474,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.LPArray)]
         public static extern byte[] glfwGetJoystickButtons(int joy, out int count);
 
@@ -2515,7 +2528,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFWjoystickfun glfwSetJoystickCallback(GLFWjoystickfun cbfun);
 
         /*! @brief Sets the clipboard to the specified string.
@@ -2539,8 +2552,13 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        public static extern void glfwSetClipboardString(GLFWwindow window, [MarshalAs(UnmanagedType.LPStr)] string str);
+        public static void glfwSetClipboardString(GLFWwindow window, string str)
+        {
+            fixed (byte* strBytes = Encoding.UTF8.GetBytes(str))
+            {
+                InternalGLFW3.glfwSetClipboardString(window, strBytes);
+            }
+        }
 
         /*! @brief Returns the contents of the clipboard as a string.
          *
@@ -2594,7 +2612,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern double glfwGetTime();
 
         /*! @brief Sets the GLFW timer.
@@ -2618,7 +2636,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSetTime(double time);
 
         /*! @brief Returns the current value of the raw timer.
@@ -2641,7 +2659,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern ulong glfwGetTimerValue();
 
         /*! @brief Returns the frequency, in Hz, of the raw timer.
@@ -2662,7 +2680,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup input
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern ulong glfwGetTimerFrequency();
 
         /*! @brief Makes the context of the specified window current for the calling
@@ -2691,7 +2709,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup context
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwMakeContextCurrent(GLFWwindow window);
 
         /*! @brief Returns the window whose context is current on the calling thread.
@@ -2712,7 +2730,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup context
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.LPStruct)]
         public static extern GLFWwindow glfwGetCurrentContext();
 
@@ -2780,7 +2798,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup context
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern void glfwSwapInterval(int interval);
 
         /*! @brief Returns whether the specified extension is available.
@@ -2811,9 +2829,13 @@ namespace GLFWnet.Binding
          *
          *  @ingroup context
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool glfwExtensionSupported([MarshalAs(UnmanagedType.LPStr)] string extension);
+        public static bool glfwExtensionSupported(string extension)
+        {
+            fixed (byte* extensionBytes = Encoding.UTF8.GetBytes(extension))
+            {
+                return InternalGLFW3.glfwExtensionSupported(extensionBytes);
+            }
+        }
 
         /*! @brief Returns the address of the specified function for the current
          *  context.
@@ -2850,8 +2872,13 @@ namespace GLFWnet.Binding
          *
          *  @ingroup context
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
-        public static extern GLFWglproc glfwGetProcAddress([MarshalAs(UnmanagedType.LPStr)] string procname);
+        public static GLFWglproc glfwGetProcAddress(string procname)
+        {
+            fixed (byte* procnameBytes = Encoding.UTF8.GetBytes(procname))
+            {
+                return InternalGLFW3.glfwGetProcAddress(procnameBytes);
+            }
+        }
 
         /*! @brief Returns whether the Vulkan loader has been found.
          *
@@ -2877,7 +2904,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup vulkan
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool glfwVulkanSupported();
 
@@ -2923,12 +2950,14 @@ namespace GLFWnet.Binding
          *
          *  @ingroup vulkan
          */
-        public static string[] glfwGetRequiredInstanceExtensions(out uint count) {
+        public static string[] glfwGetRequiredInstanceExtensions(out uint count)
+        {
             sbyte** internalExtensionNamesPointer = InternalGLFW3.glfwGetRequiredInstanceExtensions(out count);
-            
+
             var extensionNames = new string[count];
-            
-            for (var i = 0; i < count; i++) {
+
+            for (var i = 0; i < count; i++)
+            {
                 extensionNames[i] = new string(internalExtensionNamesPointer[i]);
             }
 
@@ -2976,7 +3005,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup vulkan
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern GLFWvkproc glfwGetInstanceProcAddress(VkInstance instance, const char* procname);
 
         /*! @brief Returns whether the specified queue family can present images.
@@ -3010,7 +3039,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup vulkan
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern int glfwGetPhysicalDevicePresentationSupport(VkInstance instance, VkPhysicalDevice device, uint32_t queuefamily);
 
         /*! @brief Creates a Vulkan surface for the specified window.
@@ -3061,7 +3090,7 @@ namespace GLFWnet.Binding
          *
          *  @ingroup vulkan
          */
-        [DllImport(NATIVE), SuppressUnmanagedCodeSecurity]
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern VkResult glfwCreateWindowSurface(VkInstance instance, GLFWwindow* window, const VkAllocationCallbacks* allocator, VkSurfaceKHR* surface);
 
 /*VK_VERSION_1_0*/

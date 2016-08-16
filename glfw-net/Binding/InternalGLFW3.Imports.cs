@@ -1,8 +1,10 @@
 ﻿using System.Runtime.InteropServices;
 using System.Security;
 
-namespace GLFWnet.Binding {
-    public unsafe partial class InternalGLFW3 {
+namespace GLFWnet.Binding
+{
+    public unsafe partial class InternalGLFW3
+    {
         #region GLFW API functions
         /*! @brief Returns a string describing the compile-time configuration.
          *
@@ -36,6 +38,138 @@ namespace GLFWnet.Binding {
          */
         [DllImport(GLFW3.NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
         internal static extern sbyte* glfwGetVersionString();
+
+        /*! @brief Sets the title of the specified window.
+         *
+         *  This function sets the window title, encoded as UTF-8, of the specified
+         *  window.
+         *
+         *  @param[in] window The window whose title to change.
+         *  @param[in] title The UTF-8 encoded window title.
+         *
+         *  @par Thread Safety
+         *  This function may only be called from the main thread.
+         *
+         *  @sa @ref window_title
+         *
+         *  @since Added in version 1.0.
+         *
+         *  @par
+         *  __GLFW 3:__ Added window handle parameter.
+         *
+         *  @ingroup window
+         */
+        [DllImport(GLFW3.NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void glfwSetWindowTitle(GLFWwindow window, byte* title);
+
+        /*! @brief Creates a window and its associated context.
+         *
+         *  This function creates a window and its associated OpenGL or OpenGL ES
+         *  context.  Most of the options controlling how the window and its context
+         *  should be created are specified with [window hints](@ref window_hints).
+         *
+         *  Successful creation does not change which context is current.  Before you
+         *  can use the newly created context, you need to
+         *  [make it current](@ref context_current).  For information about the `share`
+         *  parameter, see @ref context_sharing.
+         *
+         *  The created window, framebuffer and context may differ from what you
+         *  requested, as not all parameters and hints are
+         *  [hard constraints](@ref window_hints_hard).  This includes the size of the
+         *  window, especially for full screen windows.  To query the actual attributes
+         *  of the created window, framebuffer and context, use queries like @ref
+         *  glfwGetWindowAttrib and @ref glfwGetWindowSize.
+         *
+         *  To create a full screen window, you need to specify the monitor the window
+         *  will cover.  If no monitor is specified, windowed mode will be used.  Unless
+         *  you have a way for the user to choose a specific monitor, it is recommended
+         *  that you pick the primary monitor.  For more information on how to query
+         *  connected monitors, see @ref monitor_monitors.
+         *
+         *  For full screen windows, the specified size becomes the resolution of the
+         *  window's _desired video mode_.  As long as a full screen window has input
+         *  focus, the supported video mode most closely matching the desired video mode
+         *  is set for the specified monitor.  For more information about full screen
+         *  windows, including the creation of so called _windowed full screen_ or
+         *  _borderless full screen_ windows, see @ref window_windowed_full_screen.
+         *
+         *  By default, newly created windows use the placement recommended by the
+         *  window system.  To create the window at a specific position, make it
+         *  initially invisible using the [GLFW_VISIBLE](@ref window_hints_wnd) window
+         *  hint, set its [position](@ref window_pos) and then [show](@ref window_hide)
+         *  it.
+         *
+         *  If a full screen window has input focus, the screensaver is prohibited from
+         *  starting.
+         *
+         *  Window systems put limits on window sizes.  Very large or very small window
+         *  dimensions may be overridden by the window system on creation.  Check the
+         *  actual [size](@ref window_size) after creation.
+         *
+         *  The [swap interval](@ref buffer_swap) is not set during window creation and
+         *  the initial value may vary depending on driver settings and defaults.
+         *
+         *  @param[in] width The desired width, in screen coordinates, of the window.
+         *  This must be greater than zero.
+         *  @param[in] height The desired height, in screen coordinates, of the window.
+         *  This must be greater than zero.
+         *  @param[in] title The initial, UTF-8 encoded window title.
+         *  @param[in] monitor The monitor to use for full screen mode, or `NULL` to use
+         *  windowed mode.
+         *  @param[in] share The window whose context to share resources with, or `NULL`
+         *  to not share resources.
+         *  @return The handle of the created window, or `NULL` if an
+         *  [error](@ref error_handling) occurred.
+         *
+         *  @remarks __Windows:__ Window creation will fail if the Microsoft GDI
+         *  software OpenGL implementation is the only one available.
+         *
+         *  @remarks __Windows:__ If the executable has an icon resource named
+         *  `GLFW_ICON,` it will be set as the icon for the window.  If no such icon is
+         *  present, the `IDI_WINLOGO` icon will be used instead.
+         *
+         *  @remarks __Windows:__ The context to share resources with may not be current
+         *  on any other thread.
+         *
+         *  @remarks __OS X:__ The GLFW window has no icon, as it is not a document
+         *  window, but the dock icon will be the same as the application bundle's icon.
+         *  For more information on bundles, see the
+         *  [Bundle Programming Guide](https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/)
+         *  in the Mac Developer Library.
+         *
+         *  @remarks __OS X:__ The first time a window is created the menu bar is
+         *  populated with common commands like Hide, Quit and About.  The About entry
+         *  opens a minimal about dialog with information from the application's bundle.
+         *  The menu bar can be disabled with a
+         *  [compile-time option](@ref compile_options_osx).
+         *
+         *  @remarks __OS X:__ On OS X 10.10 and later the window frame will not be
+         *  rendered at full resolution on Retina displays unless the
+         *  `NSHighResolutionCapable` key is enabled in the application bundle's
+         *  `Info.plist`.  For more information, see
+         *  [High Resolution Guidelines for OS X](https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html)
+         *  in the Mac Developer Library.
+         *
+         *  @remarks __X11:__ There is no mechanism for setting the window icon yet.
+         *
+         *  @remarks __X11:__ Some window managers will not respect the placement of
+         *  initially hidden windows.
+         *
+         *  @par Reentrancy
+         *  This function may not be called from a callback.
+         *
+         *  @par Thread Safety
+         *  This function may only be called from the main thread.
+         *
+         *  @sa @ref window_creation
+         *  @sa glfwDestroyWindow
+         *
+         *  @since Added in version 3.0.  Replaces `glfwOpenWindow`.
+         *
+         *  @ingroup window
+         */
+        [DllImport(GLFW3.NATIVE, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern GLFWwindow glfwCreateWindow(int width, int height, byte* title, GLFWmonitor monitor, GLFWwindow share);
 
         /*! @brief Returns the localized name of the specified printable key.
          *
@@ -176,7 +310,7 @@ namespace GLFWnet.Binding {
          */
         [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         internal static extern sbyte* glfwGetClipboardString(GLFWwindow window);
-        
+
         /*! @brief Returns the currently connected monitors.
          *
          *  This function returns an array of handles for all currently connected
@@ -386,6 +520,100 @@ namespace GLFWnet.Binding {
                  */
         [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
         public static extern sbyte** glfwGetRequiredInstanceExtensions(out uint count);
+
+        /*! @brief Returns whether the specified extension is available.
+         *
+         *  This function returns whether the specified
+         *  [client API extension](@ref context_glext) is supported by the current
+         *  OpenGL or OpenGL ES context.  It searches both for OpenGL and OpenGL ES
+         *  extension and platform-specific context creation API extensions.
+         *
+         *  A context must be current on the calling thread.  Calling this function
+         *  without a current context will cause a @ref GLFW_NO_CURRENT_CONTEXT error.
+         *
+         *  As this functions retrieves and searches one or more extension strings each
+         *  call, it is recommended that you cache its results if it is going to be used
+         *  frequently.  The extension strings will not change during the lifetime of
+         *  a context, so there is no danger in doing this.
+         *
+         *  @param[in] extension The ASCII encoded name of the extension.
+         *  @return `GL_TRUE` if the extension is available, or `GL_FALSE` otherwise.
+         *
+         *  @par Thread Safety
+         *  This function may be called from any thread.
+         *
+         *  @sa @ref context_glext
+         *  @sa glfwGetProcAddress
+         *
+         *  @since Added in version 1.0.
+         *
+         *  @ingroup context
+         */
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool glfwExtensionSupported(byte* extension);
+
+        /*! @brief Sets the clipboard to the specified string.
+         *
+         *  This function sets the system clipboard to the specified, UTF-8 encoded
+         *  string.
+         *
+         *  @param[in] window The window that will own the clipboard contents.
+         *  @param[in] string A UTF-8 encoded string.
+         *
+         *  @par Pointer Lifetime
+         *  The specified string is copied before this function returns.
+         *
+         *  @par Thread Safety
+         *  This function may only be called from the main thread.
+         *
+         *  @sa @ref clipboard
+         *  @sa glfwGetClipboardString
+         *
+         *  @since Added in version 3.0.
+         *
+         *  @ingroup input
+         */
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern void glfwSetClipboardString(GLFWwindow window, byte* str);
+
+        /*! @brief Returns the address of the specified function for the current
+         *  context.
+         *
+         *  This function returns the address of the specified
+         *  [core or extension function](@ref context_glext), if it is supported
+         *  by the current context.
+         *
+         *  A context must be current on the calling thread.  Calling this function
+         *  without a current context will cause a @ref GLFW_NO_CURRENT_CONTEXT error.
+         *
+         *  @param[in] procname The ASCII encoded name of the function.
+         *  @return The address of the function, or `NULL` if the function is
+         *  unavailable or an [error](@ref error_handling) occurred.
+         *
+         *  @remarks The addresses of a given function is not guaranteed to be the same
+         *  between contexts.
+         *
+         *  @remarks This function may return a non-`NULL` address despite the
+         *  associated version or extension not being available.  Always check the
+         *  context version or extension string presence first.
+         *
+         *  @par Pointer Lifetime
+         *  The returned function pointer is valid until the context is destroyed or the
+         *  library is terminated.
+         *
+         *  @par Thread Safety
+         *  This function may be called from any thread.
+         *
+         *  @sa @ref context_glext
+         *  @sa glfwExtensionSupported
+         *
+         *  @since Added in version 1.0.
+         *
+         *  @ingroup context
+         */
+        [DllImport(GLFW3.NATIVE), SuppressUnmanagedCodeSecurity]
+        public static extern GLFW3.GLFWglproc glfwGetProcAddress(byte* procname);
         #endregion GLFW API functions
     }
 }

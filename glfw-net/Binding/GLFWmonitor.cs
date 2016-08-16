@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace GLFWnet.Binding {
+namespace GLFWnet.Binding
+{
     /// <summary>
     /// Opaque monitor object pointer.
     /// </summary>
     [StructLayout(LayoutKind.Explicit)]
-    public struct GLFWmonitor {
+    public struct GLFWmonitor
+    {
         [FieldOffsetAttribute(0)]
         private IntPtr pointer;
 
@@ -15,7 +17,8 @@ namespace GLFWnet.Binding {
         /// </summary>
         public readonly static GLFWmonitor NULL = new GLFWmonitor { pointer = IntPtr.Zero };
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return pointer.ToString();
         }
     }

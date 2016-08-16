@@ -1,9 +1,11 @@
-﻿namespace GLFWnet.Binding {
-    public partial class GLFW3 {
+﻿namespace GLFWnet.Binding
+{
+    public partial class GLFW3
+    {
         /*************************************************************************
          * GL API tokens
          *************************************************************************/
-        
+
         public const int GL_TRUE = 1;
 
         public const int GL_FALSE = 0;

@@ -1,11 +1,13 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace GLFWnet.Binding {
+namespace GLFWnet.Binding
+{
     /// <summary>
     /// Monitor gamma ramp.
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct GLFWgammaramp {
+    public struct GLFWgammaramp
+    {
         /// <summary>
         /// An array of value describing the response of the red channel.
         /// </summary>
@@ -27,11 +29,12 @@ namespace GLFWnet.Binding {
         /// <summary>
         /// The number of elements in each array.
         /// </summary>
-        public uint size {  get { return (uint)InternalUtils.min(red.Length, green.Length, blue.Length); } }
+        public uint size { get { return (uint)InternalUtils.min(red.Length, green.Length, blue.Length); } }
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe struct InternalGLFWgammaramp {
+    internal unsafe struct InternalGLFWgammaramp
+    {
         internal ushort* red;
         internal ushort* green;
         internal ushort* blue;

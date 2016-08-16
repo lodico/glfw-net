@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace GLFWnet.Binding {
+namespace GLFWnet.Binding
+{
     /// <summary>
     /// Opaque cursor object pointer.
     /// </summary>
     [StructLayout(LayoutKind.Explicit)]
-    public struct GLFWcursor {
+    public struct GLFWcursor
+    {
         [FieldOffsetAttribute(0)]
         private IntPtr pointer;
 
@@ -15,7 +17,8 @@ namespace GLFWnet.Binding {
         /// </summary>
         public readonly static GLFWcursor NULL = new GLFWcursor { pointer = IntPtr.Zero };
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return pointer.ToString();
         }
     }

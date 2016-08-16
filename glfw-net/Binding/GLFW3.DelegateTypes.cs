@@ -310,5 +310,5 @@ namespace GLFWnet.Binding
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void GLFWjoystickfun(int joy, int eventStatus);
         #endregion GLFW API Delegates
-        }
     }
+}
